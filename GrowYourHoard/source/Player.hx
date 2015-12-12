@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxG;
 
@@ -14,7 +15,7 @@ class Player extends FlxSprite
 	{
 		super(X, Y);
 
-		solid = true;
+		allowCollisions = FlxObject.CEILING;
 		immovable = true;
 		loadGraphic("assets/images/shield.png",true, 8, 16);
 		animation.add("main",[0,1],4,true);
