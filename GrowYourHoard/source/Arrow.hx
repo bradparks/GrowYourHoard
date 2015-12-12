@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxSprite;
+import flixel.group.FlxGroup;
 
 /**
  * ...
@@ -8,6 +9,8 @@ import flixel.FlxSprite;
  */
 class Arrow extends FlxSprite
 {
+	public static var arrows:FlxGroup = new FlxGroup();
+
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);

@@ -21,8 +21,6 @@ class PlayState extends FlxNapeState
 {
 	public static var score:Int = 0;
 
-	private var flyingArrows:FlxGroup;
-	private var landedArrows:FlxGroup;
 	private var background:FlxSprite;
 	private var castle:FlxSprite;
 	private var scoreText:FlxText;
@@ -37,9 +35,6 @@ class PlayState extends FlxNapeState
 		super.create();
 
 		FlxG.mouse.visible = false;
-
-		flyingArrows = new FlxGroup();
-		landedArrows = new FlxGroup();
 
 		background = new FlxSprite(0, 0, "assets/images/background.png");
 		background.moves = false;
@@ -86,7 +81,7 @@ class PlayState extends FlxNapeState
 		super.update();
 		scoreText.text = score+"";
 
-		FlxG.collide(flyingArrows, player, handlePlayerCollision);
+		FlxG.collide(NapeArrow.arrows, player, handlePlayerCollision);
 
 		if (FlxG.keys.justPressed.G)
 		{
@@ -98,10 +93,10 @@ class PlayState extends FlxNapeState
 	{
 		var landedArrow:Arrow = new Arrow(arrow.x, arrow.y);
 		add(landedArrow);
-		landedArrows.add(landedArrow);
+		Arrow.arrows.add(landedArrow);
 
-		flyingArrows.remove(arrow, true);
-		arrow.kill();
+		NapeArrow.arrows.remove(arrow, true);
+		arrow.destroy();
 	}
 
 	private function spawn()
@@ -109,7 +104,7 @@ class PlayState extends FlxNapeState
 		add(new Goblin(260, 172));
 
 		var arrow:NapeArrow = new NapeArrow(250, 20);
-		flyingArrows.add(arrow);
+		NapeArrow.arrows.add(arrow);
 		add(arrow);
 	}
 }

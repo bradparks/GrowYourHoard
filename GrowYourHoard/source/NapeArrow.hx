@@ -3,6 +3,7 @@ package;
 import flixel.FlxSprite;
 import flixel.addons.nape.FlxNapeSprite;
 import flixel.addons.nape.FlxNapeVelocity;
+import flixel.group.FlxGroup;
 import nape.shape.Circle;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
@@ -15,6 +16,8 @@ import flixel.util.FlxRandom;
  */
 class NapeArrow extends FlxNapeSprite
 {
+	public static var arrows:FlxGroup = new FlxGroup();
+
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
