@@ -26,22 +26,22 @@ class Player extends FlxSprite
 	{
 		super.update();
 
-		if (FlxG.keys.anyJustPressed(["A","D"]))
+		if (FlxG.keys.anyJustPressed(["A","D","LEFT","RIGHT"]) || FlxG.mouse.justPressed || FlxG.mouse.justPressedRight)
 		{
 			animation.play("main");
 		}
-		else if (!FlxG.keys.anyPressed(["A", "D"]))
+		else if (!(FlxG.keys.anyPressed(["A", "D"]) || FlxG.mouse.pressed || FlxG.mouse.pressedRight))
 		{
 			animation.frameIndex = 0;
 			animation.pause();
 		}
 
-		if (FlxG.keys.pressed.A)
+		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT || FlxG.mouse.pressed)
 		{
 			flipX = true;
 			x -= 2;
 		}
-		if (FlxG.keys.pressed.D)
+		if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT || FlxG.mouse.pressedRight)
 		{
 			flipX = false;
 			x += 2;
