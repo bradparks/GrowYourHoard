@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.nape.FlxNapeSprite;
 import flixel.addons.nape.FlxNapeVelocity;
@@ -35,7 +36,7 @@ class NapeArrow extends FlxNapeSprite
 	public function stop()
 	{
 		Arrow.arrows.add(new Arrow(this.x, this.y));
-		Reg.activeState.add(Arrow.arrows);
+		FlxG.state.add(Arrow.arrows);
 
 		NapeArrow.arrows.remove(this, true);
 		this.destroy();
