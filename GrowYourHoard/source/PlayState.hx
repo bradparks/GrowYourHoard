@@ -62,6 +62,7 @@ class PlayState extends FlxNapeState
 		spawn();
 
 		FlxNapeState.space.gravity.setxy(0, 500);
+		Reg.activeState = this;
 	}
 
 	/**
@@ -92,7 +93,6 @@ class PlayState extends FlxNapeState
 	private function handlePlayerCollision(arrow:NapeArrow, player:Player)
 	{
 		arrow.stop();
-		add(Arrow.arrows);
 	}
 
 	private function spawn()

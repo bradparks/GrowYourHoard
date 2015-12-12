@@ -35,6 +35,7 @@ class NapeArrow extends FlxNapeSprite
 	public function stop()
 	{
 		Arrow.arrows.add(new Arrow(this.x, this.y));
+		Reg.activeState.add(Arrow.arrows);
 
 		NapeArrow.arrows.remove(this, true);
 		this.destroy();
