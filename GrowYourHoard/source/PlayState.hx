@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.nape.FlxNapeSprite;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -7,11 +8,14 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import haxe.Timer;
+import nape.space.Space;
+import nape.geom.Vec2;
+import flixel.addons.nape.FlxNapeState;
 
 /**
  * A FlxState which can be used for the actual gameplay.
  */
-class PlayState extends FlxState
+class PlayState extends FlxNapeState
 {
 	public static var score:Int = 0;
 	
@@ -19,6 +23,8 @@ class PlayState extends FlxState
 	private var castle:FlxSprite;
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
+	private var arrow:Arrow;
+	private var player:Player;
 	
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -29,18 +35,22 @@ class PlayState extends FlxState
 		
 		background = new FlxSprite(0, 0, "assets/images/background.png");
 		castle = new FlxSprite(250, 32, "assets/images/castle.png");
+		arrow = new Arrow(250, 20);
+		player = new Player(60, 157);
+		scoreText = new FlxText(0, 0, 320);
+		scoreText.text = score+"";
+		scoreText.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
+		scoreText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		
 		add(background);
 		add(castle);
+		//add(arrow);
 		add(new Goblin(260, 172));
-		add(new Player(60, 157));
-		spawnTimer = new Timer(Math.floor(2000*Math.random()));//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
-		spawnTimer.run = spawn;
-		scoreText = new FlxText(0, 0, 320); // x, y, width
-		scoreText.text = score+"";
-		scoreText.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.WHITE, "center");
-		scoreText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.RED, 1);
+		add(player);
 		add(scoreText);
+		
+		spawnTimer = new Timer(Math.floor(2000));//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
+		spawnTimer.run = spawn;
 	}
 
 	/**
