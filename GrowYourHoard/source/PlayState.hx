@@ -23,7 +23,7 @@ class PlayState extends FlxNapeState
 	private var castle:FlxSprite;
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
-	private var arrow:Arrow;
+	//private var arrow:Arrow;
 	private var player:Player;
 	
 	/**
@@ -35,7 +35,7 @@ class PlayState extends FlxNapeState
 		
 		background = new FlxSprite(0, 0, "assets/images/background.png");
 		castle = new FlxSprite(250, 32, "assets/images/castle.png");
-		arrow = new Arrow(250, 20);
+		//arrow = ;
 		player = new Player(60, 157);
 		scoreText = new FlxText(0, 0, 320);
 		scoreText.text = score+"";
@@ -44,13 +44,15 @@ class PlayState extends FlxNapeState
 		
 		add(background);
 		add(castle);
-		//add(arrow);
+		add(new Arrow(250, 20));
 		add(new Goblin(260, 172));
 		add(player);
 		add(scoreText);
 		
 		spawnTimer = new Timer(Math.floor(2000));//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
 		spawnTimer.run = spawn;
+		
+		FlxNapeState.space.gravity.setxy(0, 500);
 	}
 
 	/**
@@ -69,10 +71,16 @@ class PlayState extends FlxNapeState
 	{
 		super.update();
 		scoreText.text = score+"";
+		
+		if (FlxG.keys.justPressed.G)
+		{
+			napeDebugEnabled = !napeDebugEnabled;
+		}
 	}
 	
 	private function spawn()
 	{
 		add(new Goblin(260, 172));
+		add(new Arrow(250, 20));
 	}
 }
