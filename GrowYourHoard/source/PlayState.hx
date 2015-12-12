@@ -91,12 +91,8 @@ class PlayState extends FlxNapeState
 
 	private function handlePlayerCollision(arrow:NapeArrow, player:Player)
 	{
-		var landedArrow:Arrow = new Arrow(arrow.x, arrow.y);
-		add(landedArrow);
-		Arrow.arrows.add(landedArrow);
-
-		NapeArrow.arrows.remove(arrow, true);
-		arrow.destroy();
+		arrow.stop();
+		add(Arrow.arrows);
 	}
 
 	private function spawn()

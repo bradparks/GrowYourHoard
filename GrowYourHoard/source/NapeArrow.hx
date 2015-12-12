@@ -34,10 +34,19 @@ class NapeArrow extends FlxNapeSprite
 
 	public function stop()
 	{
-		solid = false;
-		body.allowMovement = false;
-		body.allowRotation = false;
-		body.disableCCD = true;
-		FlxNapeVelocity.stopVelocity(this);
+		Arrow.arrows.add(new Arrow(this.x, this.y));
+
+		NapeArrow.arrows.remove(this, true);
+		this.destroy();
+	}
+
+	override public function update():Void
+	{
+		super.update();
+
+		if (this.y > 177)
+		{
+			this.stop();
+		}
 	}
 }
