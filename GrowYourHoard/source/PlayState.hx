@@ -4,9 +4,11 @@ import flixel.addons.nape.FlxNapeSprite;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
+import flixel.util.FlxPoint;
 import haxe.Timer;
 import nape.space.Space;
 import nape.geom.Vec2;
@@ -18,40 +20,51 @@ import flixel.addons.nape.FlxNapeState;
 class PlayState extends FlxNapeState
 {
 	public static var score:Int = 0;
-	
+
+	private var arrows:FlxGroup;
 	private var background:FlxSprite;
 	private var castle:FlxSprite;
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
-	//private var arrow:Arrow;
 	private var player:Player;
-	
+
 	/**
 	 * Function that is called up when to state is created to set it up.
 	 */
 	override public function create():Void
 	{
 		super.create();
-		
+
+		FlxG.mouse.visible = false;
+
+		arrows = new FlxGroup();
+
 		background = new FlxSprite(0, 0, "assets/images/background.png");
+		background.moves = false;
+		background.solid = false;
+		add(background);
+
 		castle = new FlxSprite(250, 32, "assets/images/castle.png");
-		//arrow = ;
+		castle.moves = false;
+		castle.solid = false;
+		add(castle);
+
 		player = new Player(60, 157);
+		add(player);
+
+
 		scoreText = new FlxText(0, 0, 320);
 		scoreText.text = score+"";
 		scoreText.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
 		scoreText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
-		
-		add(background);
-		add(castle);
-		add(new Arrow(250, 20));
-		add(new Goblin(260, 172));
-		add(player);
 		add(scoreText);
-		
-		spawnTimer = new Timer(Math.floor(2000));//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
+
+		//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
+		spawnTimer = new Timer(Math.floor(2000));
 		spawnTimer.run = spawn;
-		
+
+		spawn();
+
 		FlxNapeState.space.gravity.setxy(0, 500);
 	}
 
@@ -71,16 +84,26 @@ class PlayState extends FlxNapeState
 	{
 		super.update();
 		scoreText.text = score+"";
-		
+
+		FlxG.collide(arrows, player, handlePlayerCollision);
+
 		if (FlxG.keys.justPressed.G)
 		{
 			napeDebugEnabled = !napeDebugEnabled;
 		}
 	}
-	
+
+	private function handlePlayerCollision(arrow:Arrow, player:Player)
+	{
+		arrow.stop();
+	}
+
 	private function spawn()
 	{
 		add(new Goblin(260, 172));
-		add(new Arrow(250, 20));
+
+		var arrow:Arrow = new Arrow(250, 20);
+		arrows.add(arrow);
+		add(arrow);
 	}
 }
