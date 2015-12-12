@@ -34,10 +34,12 @@ class Player extends FlxSprite
 		
 		if (FlxG.keys.pressed.A)
 		{
+			flipX = true;
 			x -= 2;
 		}
 		if (FlxG.keys.pressed.D)
 		{
+			flipX = false;
 			x += 2;
 		}
 		

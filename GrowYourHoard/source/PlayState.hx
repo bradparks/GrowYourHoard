@@ -6,6 +6,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
+import haxe.Timer;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -17,6 +18,7 @@ class PlayState extends FlxState
 	private var background:FlxSprite;
 	private var castle:FlxSprite;
 	private var scoreText:FlxText;
+	private var spawnTimer:Timer;
 	
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -32,6 +34,8 @@ class PlayState extends FlxState
 		add(castle);
 		add(new Goblin(260, 172));
 		add(new Player(60, 157));
+		spawnTimer = new Timer(Math.floor(2000*Math.random()));//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
+		spawnTimer.run = spawn;
 		scoreText = new FlxText(0, 0, 320); // x, y, width
 		scoreText.text = score+"";
 		scoreText.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.WHITE, "center");
@@ -55,5 +59,10 @@ class PlayState extends FlxState
 	{
 		super.update();
 		scoreText.text = score+"";
+	}
+	
+	private function spawn()
+	{
+		add(new Goblin(260, 172));
 	}
 }
