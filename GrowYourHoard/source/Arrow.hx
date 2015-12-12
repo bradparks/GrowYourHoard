@@ -9,7 +9,7 @@ import flixel.group.FlxGroup;
  */
 class Arrow extends FlxSprite
 {
-	public static var arrows:FlxGroup = new FlxGroup();
+	public static var arrows:FlxGroup = null;
 
 	public function new(X:Float=0, Y:Float=0)
 	{

@@ -9,7 +9,7 @@ import flixel.group.FlxGroup;
  */
 class Goblin extends FlxSprite
 {
-	public static var goblins:FlxGroup = new FlxGroup();
+	public static var goblins:FlxGroup = null;
 
 	public function new(X:Float=0, Y:Float=0, unitHealth:Float=1.0, ?SimpleGraphic:Dynamic)
 	{
@@ -32,7 +32,7 @@ class Goblin extends FlxSprite
 		this.x -= 1;
 		if (this.x < 0 - width)
 		{
-			PlayState.score += 1;
+			Reg.score += 1;
 			kill();
 		}
 	}

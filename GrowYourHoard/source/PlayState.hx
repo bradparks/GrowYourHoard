@@ -19,12 +19,11 @@ import flixel.addons.nape.FlxNapeState;
  */
 class PlayState extends FlxNapeState
 {
-	public static var score:Int = 0;
-
 	private var background:FlxSprite;
 	private var castle:FlxSprite;
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
+	private var levelTimer:Timer;
 	private var player:Player;
 
 	/**
@@ -33,6 +32,10 @@ class PlayState extends FlxNapeState
 	override public function create():Void
 	{
 		super.create();
+
+		Goblin.goblins = new FlxGroup();
+		NapeArrow.arrows = new FlxGroup();
+		Arrow.arrows = new FlxGroup();
 
 		FlxG.mouse.visible = false;
 
@@ -50,18 +53,22 @@ class PlayState extends FlxNapeState
 		add(player);
 
 		scoreText = new FlxText(0, 0, 320);
-		scoreText.text = score+"";
+		scoreText.text = Reg.score+"";
 		scoreText.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
 		scoreText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(scoreText);
 
 		//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
-		spawnTimer = new Timer(Math.floor(2000));
+		spawnTimer = new Timer(2000);
 		spawnTimer.run = spawn;
 
 		spawn();
 
 		FlxNapeState.space.gravity.setxy(0, 500);
+
+		Reg.level += 1;
+		levelTimer = new Timer((30 + Reg.level) * 1000);
+		levelTimer.run = endLevel;
 	}
 
 	/**
@@ -79,7 +86,7 @@ class PlayState extends FlxNapeState
 	override public function update():Void
 	{
 		super.update();
-		scoreText.text = score+"";
+		scoreText.text = Reg.score+"";
 
 		FlxG.collide(NapeArrow.arrows, player, handlePlayerCollision);
 		FlxG.collide(NapeArrow.arrows, Goblin.goblins, handleGoblinCollision);
@@ -108,5 +115,19 @@ class PlayState extends FlxNapeState
 
 		NapeArrow.arrows.add(new NapeArrow(250, 20));
 		add(NapeArrow.arrows);
+	}
+
+	private function endLevel()
+	{
+		Goblin.goblins.destroy();
+		NapeArrow.arrows.destroy();
+		Arrow.arrows.destroy();
+
+		spawnTimer.stop();
+		levelTimer.stop();
+
+		FlxG.mouse.visible = true;
+
+		FlxG.switchState(new HoardState());
 	}
 }

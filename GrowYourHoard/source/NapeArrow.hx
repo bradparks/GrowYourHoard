@@ -17,7 +17,7 @@ import flixel.util.FlxRandom;
  */
 class NapeArrow extends FlxNapeSprite
 {
-	public static var arrows:FlxGroup = new FlxGroup();
+	public static var arrows:FlxGroup = null;
 
 	public function new(X:Float=0, Y:Float=0)
 	{
