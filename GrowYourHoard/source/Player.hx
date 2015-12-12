@@ -13,7 +13,7 @@ class Player extends FlxSprite
 	public function new(X:Float=0, Y:Float=0) 
 	{
 		super(X, Y);
-		loadGraphic("assets/images/shield.png", 8, 16);
+		loadGraphic("assets/images/shield.png",true, 8, 16);
 		animation.add("main",[0,1],4,true);
 		setGraphicSize(20, 40);
 	}
