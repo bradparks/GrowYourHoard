@@ -38,7 +38,6 @@ class NapeArrow extends FlxNapeSprite
 		Arrow.arrows.add(new Arrow(this.x, this.y));
 		FlxG.state.add(Arrow.arrows);
 
-		NapeArrow.arrows.remove(this, true);
 		this.destroy();
 	}
 
@@ -50,5 +49,11 @@ class NapeArrow extends FlxNapeSprite
 		{
 			this.stop();
 		}
+	}
+
+	override public function destroy():Void
+	{
+		NapeArrow.arrows.remove(this, true);
+		super.destroy();
 	}
 }

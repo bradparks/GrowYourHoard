@@ -10,7 +10,6 @@ import flixel.FlxG;
  */
 class Player extends FlxSprite
 {
-
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
@@ -41,6 +40,7 @@ class Player extends FlxSprite
 			flipX = true;
 			x -= 2;
 		}
+
 		if (FlxG.keys.pressed.D)
 		{
 			flipX = false;

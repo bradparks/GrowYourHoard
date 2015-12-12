@@ -82,6 +82,7 @@ class PlayState extends FlxNapeState
 		scoreText.text = score+"";
 
 		FlxG.collide(NapeArrow.arrows, player, handlePlayerCollision);
+		FlxG.collide(NapeArrow.arrows, Goblin.goblins, handleGoblinCollision);
 
 		if (FlxG.keys.justPressed.G)
 		{
@@ -94,12 +95,18 @@ class PlayState extends FlxNapeState
 		arrow.stop();
 	}
 
+	private function handleGoblinCollision(arrow:NapeArrow, goblin:Goblin)
+	{
+		goblin.hurt(1.0);
+		arrow.destroy();
+	}
+
 	private function spawn()
 	{
-		add(new Goblin(260, 172));
+		Goblin.goblins.add(new Goblin(260, 172));
+		add(Goblin.goblins);
 
-		var arrow:NapeArrow = new NapeArrow(250, 20);
-		NapeArrow.arrows.add(arrow);
-		add(arrow);
+		NapeArrow.arrows.add(new NapeArrow(250, 20));
+		add(NapeArrow.arrows);
 	}
 }

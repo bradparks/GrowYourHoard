@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxSprite;
+import flixel.group.FlxGroup;
 
 /**
  * ...
@@ -8,12 +9,16 @@ import flixel.FlxSprite;
  */
 class Goblin extends FlxSprite
 {
+	public static var goblins:FlxGroup = new FlxGroup();
 
-	public function new(X:Float=0, Y:Float=0, ?SimpleGraphic:Dynamic)
+	public function new(X:Float=0, Y:Float=0, unitHealth:Float=1.0, ?SimpleGraphic:Dynamic)
 	{
 		super(X, Y, SimpleGraphic);
 
-		solid = false;
+		solid = true;
+		immovable = true;
+		health = unitHealth;
+
 		loadGraphic("assets/images/goblin1.png", true, 8, 8);
 		animation.add("main", [0, 1], 4, true);
 		setGraphicSize(20, 20);
@@ -30,5 +35,12 @@ class Goblin extends FlxSprite
 			PlayState.score += 1;
 			kill();
 		}
+	}
+
+	override public function kill():Void
+	{
+		super.kill();
+		Goblin.goblins.remove(this, true);
+		destroy();
 	}
 }
