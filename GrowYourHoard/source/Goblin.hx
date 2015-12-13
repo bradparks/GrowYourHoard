@@ -24,7 +24,7 @@ class Goblin extends FlxSprite
 		setup();
 	}
 
-	public function setup()
+	private function setup()
 	{
 		loadGraphic("assets/images/goblin1.png", true, 8, 8);
 		animation.add("main", [0, 1], 4, true);
@@ -41,9 +41,11 @@ class Goblin extends FlxSprite
 	{
 		super.update();
 
+		this.y = getTargetY();
+
 		if (this.x < 0 - width)
 		{
-			Reg.score += 1;
+			Reg.score += getScore();
 			kill();
 		}
 	}
@@ -53,5 +55,15 @@ class Goblin extends FlxSprite
 		super.kill();
 		Goblin.goblins.remove(this, true);
 		destroy();
+	}
+
+	private function getScore()
+	{
+		return 1;
+	}
+
+	private function getTargetY()
+	{
+		return 172;
 	}
 }

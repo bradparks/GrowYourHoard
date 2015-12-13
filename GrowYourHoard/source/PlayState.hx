@@ -119,6 +119,11 @@ class PlayState extends FlxNapeState
 			Reg.upgrades["greedy_goblin"]["number"] -= 1;
 			Goblin.goblins.add(new GreedyGoblin(260, 172));
 		}
+		else if (Reg.upgrades["ogre"]["number"] > 0)
+		{
+			Reg.upgrades["ogre"]["number"] -= 1;
+			Goblin.goblins.add(new Ogre(260, 145));
+		}
 		else
 		{
 			Goblin.goblins.add(new Goblin(260, 172));

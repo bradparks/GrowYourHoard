@@ -10,7 +10,7 @@ class GreedyGoblin extends Goblin
 		super(X, Y, unitHealth, SimpleGraphic);
 	}
 
-	override function setup()
+	override private function setup()
 	{
 		loadGraphic("assets/images/goblinbigbag.png", true, 8, 8);
 		animation.add("main", [0, 1], 4, true);
@@ -23,14 +23,8 @@ class GreedyGoblin extends Goblin
 		FlxVelocity.moveTowardsPoint(this, new FlxPoint(0 - width, y), 30);
 	}
 
-	override public function update():Void
+	override private function getScore()
 	{
-		super.update();
-
-		if (this.x < 0 - width)
-		{
-			Reg.score += 3;
-			kill();
-		}
+		return 3;
 	}
 }

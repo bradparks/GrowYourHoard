@@ -8,6 +8,7 @@ class Reg
 	public static var counters = [
 		"goblins_launched"        => 0,
 		"greedy_goblins_launched" => 0,
+		"ogres_launched"          => 0,
 		"arrows_launched"         => 0,
 		"arrows_blocked"          => 0
 	];
