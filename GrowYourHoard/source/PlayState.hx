@@ -111,11 +111,20 @@ class PlayState extends FlxNapeState
 
 	private function spawn()
 	{
-		Goblin.goblins.add(new Goblin(260, 172));
-		add(Goblin.goblins);
-
 		NapeArrow.arrows.add(new NapeArrow(250, 20));
 		add(NapeArrow.arrows);
+
+		if (Reg.upgrades["greedy_goblin"]["number"] > 0)
+		{
+			Reg.upgrades["greedy_goblin"]["number"] -= 1;
+			Goblin.goblins.add(new GreedyGoblin(260, 172));
+		}
+		else
+		{
+			Goblin.goblins.add(new Goblin(260, 172));
+		}
+
+		add(Goblin.goblins);
 	}
 
 	private function endLevel()

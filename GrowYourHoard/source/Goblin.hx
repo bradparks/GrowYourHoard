@@ -2,6 +2,8 @@ package;
 
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
+import flixel.util.FlxPoint;
+import flixel.util.FlxVelocity;
 
 /**
  * ...
@@ -19,6 +21,11 @@ class Goblin extends FlxSprite
 		immovable = true;
 		health = unitHealth;
 
+		setup();
+	}
+
+	public function setup()
+	{
 		loadGraphic("assets/images/goblin1.png", true, 8, 8);
 		animation.add("main", [0, 1], 4, true);
 		setGraphicSize(20, 20);
@@ -26,12 +33,14 @@ class Goblin extends FlxSprite
 		animation.play("main");
 
 		Reg.counters["goblins_launched"] += 1;
+
+		FlxVelocity.moveTowardsPoint(this, new FlxPoint(0 - width, y), 60);
 	}
 
 	override public function update():Void
 	{
 		super.update();
-		this.x -= 1;
+
 		if (this.x < 0 - width)
 		{
 			Reg.score += 1;

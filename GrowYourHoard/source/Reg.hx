@@ -6,9 +6,10 @@ class Reg
 	public static var level:Int = 0;
 
 	public static var counters = [
-		"goblins_launched" => 0,
-		"arrows_launched"  => 0,
-		"arrows_blocked"   => 0
+		"goblins_launched"        => 0,
+		"greedy_goblins_launched" => 0,
+		"arrows_launched"         => 0,
+		"arrows_blocked"          => 0
 	];
 
 	public static var upgrades = [
