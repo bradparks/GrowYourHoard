@@ -34,13 +34,13 @@ class HoardState extends FlxState
 		head.scale.set(2, 2);
 		playBtn = new Button(50, 200, 220, 30, "assets/images/button.png", "NEXT LEVEL");
 		//helpBtn = new Button(100, 185, 120, 30, "assets/images/button.png", "HELP");
-		
+
 		add(new FlxSprite(0, 0, "assets/images/menubackground.png"));
 		add(subHead);
 		add(head);
 		add(playBtn);
 		//add(helpBtn);
-		
+
 		MouseEventManager.add(playBtn.clickRegion, null, play,null,null,false,true,false);
 		//MouseEventManager.add(helpBtn.clickRegion, null, help,null,null,false,true,false);
 	}
@@ -61,12 +61,12 @@ class HoardState extends FlxState
 	{
 		super.update();
 	}
-	
+
 	public function play(sprite:FlxSprite = null)
 	{
 		FlxG.switchState(new PlayState());
 	}
-	
+
 	public function help(sprite:FlxSprite = null)
 	{
 		FlxG.switchState(new HelpState());

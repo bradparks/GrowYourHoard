@@ -31,6 +31,8 @@ class NapeArrow extends FlxNapeSprite
 
 		body.shapes.at(0).material.density = .5;
 		body.applyImpulse(new Vec2(-8 * FlxRandom.floatRanged(.15, 1), -8 * FlxRandom.floatRanged(.15, 1)));
+
+		Reg.counters["arrows_launched"] += 1;
 	}
 
 	public function stop()

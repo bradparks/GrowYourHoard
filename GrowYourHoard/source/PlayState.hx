@@ -100,6 +100,7 @@ class PlayState extends FlxNapeState
 	private function handlePlayerCollision(arrow:NapeArrow, player:Player)
 	{
 		arrow.stop();
+		Reg.counters["arrows_blocked"] += 1;
 	}
 
 	private function handleGoblinCollision(arrow:NapeArrow, goblin:Goblin)

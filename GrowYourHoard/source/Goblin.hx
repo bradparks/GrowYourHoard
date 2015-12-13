@@ -24,6 +24,8 @@ class Goblin extends FlxSprite
 		setGraphicSize(20, 20);
 		flipX = true;
 		animation.play("main");
+
+		Reg.counters["goblins_launched"] += 1;
 	}
 
 	override public function update():Void
