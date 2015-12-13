@@ -4,6 +4,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.group.FlxGroup;
+import Arrow;
 
 /**
  * ...
@@ -11,7 +12,9 @@ import flixel.group.FlxGroup;
  */
 class PlayerGroup extends FlxGroup
 {
-	var goblin:FlxSprite;
+	public var goblin:FlxSprite;
+	public var arrows:Array<Arrow> = [];
+	
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super();
@@ -23,30 +26,35 @@ class PlayerGroup extends FlxGroup
 		goblin.setGraphicSize(20, 40);
 		add(goblin);
 	}
-
+	
 	override public function update():Void
 	{
 		super.update();
-
-		if (FlxG.keys.anyJustPressed(["A","D","LEFT","RIGHT"]) || FlxG.mouse.justPressed || FlxG.mouse.justPressedRight)
-		{
-			goblin.animation.play("main");
-		}
-		else if (!(FlxG.keys.anyPressed(["A", "D"]) || FlxG.mouse.pressed || FlxG.mouse.pressedRight))
+		var i:Int;
+		if (!(FlxG.keys.anyPressed(["A", "D"]) || FlxG.mouse.pressed || FlxG.mouse.pressedRight))
 		{
 			goblin.animation.frameIndex = 0;
 			goblin.animation.pause();
 		}
-
 		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT || FlxG.mouse.pressed)
 		{
+			goblin.animation.play("main");
 			goblin.flipX = true;
 			goblin.x -= 2;
+			for (i in 0...arrows.length)
+			{
+				arrows[i].x -= 2;
+			}
 		}
 		if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT || FlxG.mouse.pressedRight)
 		{
+			goblin.animation.play("main");
 			goblin.flipX = false;
 			goblin.x += 2;
+			for (i in 0...arrows.length)
+			{
+				arrows[i].x += 2;
+			}
 		}
 	}
 }
