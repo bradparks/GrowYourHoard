@@ -59,23 +59,23 @@ class HoardState extends FlxState
 
 		menuButtons = new FlxGroup();
 
-		add(new FlxSprite(0, 0, "assets/images/menubackground.png"));
+		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
 
 		subHead = new FlxText(0, 0, 320);
 		subHead.text = "GROW YOUR";
-		subHead.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
+		subHead.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
 		subHead.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(subHead);
 		
 		scoreText = new FlxText(235, 40, 50);
 		scoreText.text = Reg.score+"";
-		scoreText.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
+		scoreText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
 		scoreText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(scoreText);
 
 		head = new FlxText(0, 35, 320);
 		head.text = "HOARD";
-		head.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
+		head.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
 		head.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		head.scale.set(2, 2);
 		add(head);
@@ -151,12 +151,12 @@ class HoardState extends FlxState
 										   buttons[buttonName]["y"],
 										   buttons[buttonName]["width"],
 										   buttons[buttonName]["height"],
-										   "assets/images/button.png",
-										   buttonName+" "+callbacksWorth[buttons[buttonName]["callback"]]);
+										   AssetPaths.button__png,
+										   buttonName+" " + callbacksWorth[buttons[buttonName]["callback"]],
+										   callbacks[buttons[buttonName]["callback"]]);
 
 			menuButtons.add(button);
 
-			MouseEventManager.add(button.clickRegion, null, callbacks[buttons[buttonName]["callback"]], null, null, false, true, false);
 		}
 
 		add(menuButtons);

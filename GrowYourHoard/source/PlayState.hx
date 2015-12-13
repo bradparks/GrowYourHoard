@@ -42,18 +42,18 @@ class PlayState extends FlxNapeState
 
 		FlxG.mouse.visible = false;
 
-		background = new FlxSprite(0, 0, "assets/images/background.png");
+		background = new FlxSprite(0, 0, AssetPaths.background__png);
 		background.moves = false;
 		background.solid = false;
 		add(background);
 
 		fire = new FlxSprite(255, 30);
-		fire.loadGraphic("assets/images/fire.png", true, 68, 80);
+		fire.loadGraphic(AssetPaths.fire__png, true, 68, 80);
 		fire.animation.add("main", [0, 1, 2], 10);
 		fire.animation.play("main");
 		add(fire);
 		
-		castle = new FlxSprite(250, 57, "assets/images/castle.png");
+		castle = new FlxSprite(250, 57, AssetPaths.castle__png);
 		castle.moves = false;
 		castle.solid = false;
 		add(castle);
@@ -63,7 +63,7 @@ class PlayState extends FlxNapeState
 
 		scoreText = new FlxText(0, 0, 320);
 		scoreText.text = Reg.score+"";
-		scoreText.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
+		scoreText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
 		scoreText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(scoreText);
 
@@ -152,7 +152,7 @@ class PlayState extends FlxNapeState
 		shootTimer.stop();
 		shootTimer = new Timer(Math.floor(1000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		shootTimer.run = shoot;
-		NapeArrow.arrows.add(new NapeArrow(250, 45));
+		NapeArrow.arrows.add(new NapeArrow(250, 70));
 		add(NapeArrow.arrows);
 	}
 

@@ -5,7 +5,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-
+import flixel.plugin.MouseEventManager;
 /**
  * ...
  * @author John Doughty
@@ -16,7 +16,7 @@ class Button extends FlxGroup
 	public var text:FlxText;
 	public var clickRegion:FlxSprite;
 
-	public function new(x, y, width, height, backgroundSpriteFile, textString)
+	public function new(x, y, width, height, backgroundSpriteFile, textString, click)
 	{
 		super();
 		background = new FlxSprite(x, y, backgroundSpriteFile);
@@ -33,5 +33,16 @@ class Button extends FlxGroup
 		add(background);
 		add(text);
 		add(clickRegion);
+		MouseEventManager.add(clickRegion, null, click, over, out,false,true,false);
+	}
+	
+	public function over(sprite:FlxSprite)
+	{
+		clickRegion.alpha = 0.2;
+	}
+	
+	public function out(sprite:FlxSprite)
+	{
+		clickRegion.alpha = 0;
 	}
 }

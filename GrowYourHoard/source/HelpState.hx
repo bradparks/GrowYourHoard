@@ -25,25 +25,22 @@ class HelpState extends FlxState
 		super.create();
 		head = new FlxText(0,20, 320);
 		head.text = "Help";
-		head.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
+		head.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
 		head.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		head.scale.set(2, 2);
 		text = new FlxText(0, 60, 300);
 		text.text = "Press D or A to go Left and Right and shield your loyal minions from arrow fire";
-		text.setFormat("assets/fonts/Our-Arcade-Games.ttf", 13, FlxColor.GOLDEN, "center");
+		text.setFormat(AssetPaths.Our_Arcade_Games__ttf, 13, FlxColor.GOLDEN, "center");
 		
 		text.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
-		playBtn = new Button(100, 150, 120, 30, "assets/images/button.png", "PLAY");
-		menuBtn = new Button(100, 185, 120, 30, "assets/images/button.png", "MENU");
+		playBtn = new Button(100, 150, 120, 30, AssetPaths.button__png, "PLAY",play);
+		menuBtn = new Button(100, 185, 120, 30, AssetPaths.button__png, "MENU",menu);
 		
-		add(new FlxSprite(0, 0, "assets/images/menubackground.png"));
+		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
 		add(text);
 		add(head);
 		add(playBtn);
 		add(menuBtn);
-		
-		MouseEventManager.add(playBtn.clickRegion, null, play,null,null,false,true,false);
-		MouseEventManager.add(menuBtn.clickRegion, null, menu,null,null,false,true,false);
 	}
 
 	/**
