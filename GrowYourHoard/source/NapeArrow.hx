@@ -23,7 +23,7 @@ class NapeArrow extends FlxNapeSprite
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
-		loadGraphic("assets/images/arrow.png", false, 8, 8);
+		loadGraphic(AssetPaths.arrow__png, false, 8, 8);
 
 		solid = true;
 		antialiasing = true;

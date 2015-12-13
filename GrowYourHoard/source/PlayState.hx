@@ -100,8 +100,11 @@ class PlayState extends FlxNapeState
 	override public function update():Void
 	{
 		super.update();
-		scoreText.text = Reg.score+"";
-
+		if (Reg.score+"" != scoreText.text)
+		{
+			scoreText.text = Reg.score+"";
+			FlxG.sound.play(AssetPaths.coin__wav);
+		}
 		FlxG.collide(NapeArrow.arrows, player.goblin, handlePlayerCollision);
 		FlxG.collide(NapeArrow.arrows, Goblin.goblins, handleGoblinCollision);
 
@@ -123,6 +126,7 @@ class PlayState extends FlxNapeState
 	{
 		goblin.hurt(1.0);
 		arrow.destroy();
+		FlxG.sound.play(AssetPaths.hit__wav);
 	}
 
 	private function spawn()
@@ -154,6 +158,7 @@ class PlayState extends FlxNapeState
 		shootTimer.run = shoot;
 		NapeArrow.arrows.add(new NapeArrow(250, 70));
 		add(NapeArrow.arrows);
+		FlxG.sound.play(AssetPaths.arrowshoot__wav);
 	}
 
 	private function endLevel()
