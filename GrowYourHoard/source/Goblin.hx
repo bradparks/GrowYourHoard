@@ -50,13 +50,6 @@ class Goblin extends FlxSprite
 		}
 	}
 
-	override public function kill():Void
-	{
-		super.kill();
-		Goblin.goblins.remove(this, true);
-		destroy();
-	}
-
 	private function getScore()
 	{
 		return 1;

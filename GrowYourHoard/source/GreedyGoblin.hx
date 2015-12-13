@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxRandom;
 import flixel.util.FlxPoint;
 import flixel.util.FlxVelocity;
 
@@ -10,13 +11,26 @@ class GreedyGoblin extends Goblin
 		super(X, Y, unitHealth, SimpleGraphic);
 	}
 
+	override public function update():Void
+	{
+		super.update();
+
+		if (FlxRandom.chanceRoll(1))
+		{
+			moves = !moves;
+			animation.play(moves ? "walking" : "stopped");
+		}
+	}
+
 	override private function setup()
 	{
 		loadGraphic("assets/images/goblinbigbag.png", true, 8, 8);
-		animation.add("main", [0, 1], 4, true);
 		setGraphicSize(20, 20);
 		flipX = true;
-		animation.play("main");
+
+		animation.add("walking", [0, 1], 4, true);
+		animation.add("stopped", [0, 2, 3], 4, true);
+		animation.play("walking");
 
 		Reg.counters["greedy_goblins_launched"] += 1;
 

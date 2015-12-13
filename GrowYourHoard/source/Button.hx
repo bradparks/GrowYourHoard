@@ -34,5 +34,4 @@ class Button extends FlxGroup
 		add(text);
 		add(clickRegion);
 	}
-
 }
