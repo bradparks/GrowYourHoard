@@ -18,6 +18,7 @@ class MenuState extends FlxState
 	var playBtn:Button;
 	var helpBtn:Button;
 	var goblin:FlxSprite;
+
 	/**
 	 * Function that is called up when to state is created to set it up.
 	 */
@@ -26,30 +27,30 @@ class MenuState extends FlxState
 		super.create();
 
 		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
-		
+
 		goblin = new FlxSprite(130, 100);
 		goblin.loadGraphic(AssetPaths.shieldwithgold__png, true, 8, 16);
 		goblin.setGraphicSize(30, 60);
 		goblin.animation.add("main", [0, 1], 5, true);
 		goblin.animation.play("main");
 		add(goblin);
-		
+
 		subHead = new FlxText(0, 0, 320);
 		subHead.text = "GROW YOUR";
 		subHead.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
 		subHead.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(subHead);
-		
+
 		head = new FlxText(0, 35, 320);
 		head.text = "HOARD";
 		head.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
 		head.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		head.scale.set(2, 2);
 		add(head);
-		
+
 		playBtn = new Button(100, 150, 120, 30, AssetPaths.button__png, "PLAY", play);
 		add(playBtn);
-		
+
 		helpBtn = new Button(100, 185, 120, 30, AssetPaths.button__png, "HELP", help);
 		add(helpBtn);
 	}
@@ -70,12 +71,12 @@ class MenuState extends FlxState
 	{
 		super.update();
 	}
-	
+
 	public function play(sprite:FlxSprite = null)
 	{
 		FlxG.switchState(new PlayState());
 	}
-	
+
 	public function help(sprite:FlxSprite = null)
 	{
 		FlxG.switchState(new HelpState());

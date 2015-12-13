@@ -55,7 +55,7 @@ class PlayState extends FlxNapeState
 		fire.animation.add("main", [0, 1, 2], 10);
 		fire.animation.play("main");
 		add(fire);
-		
+
 		castle = new FlxSprite(250, 57, AssetPaths.castle__png);
 		castle.moves = false;
 		castle.solid = false;
@@ -103,11 +103,13 @@ class PlayState extends FlxNapeState
 	override public function update():Void
 	{
 		super.update();
+
 		if (Reg.score+"" != scoreText.text)
 		{
 			scoreText.text = Reg.score+"";
 			FlxG.sound.play(AssetPaths.coin__wav);
 		}
+
 		FlxG.collide(NapeProjectile.projectiles, player.goblin, handlePlayerCollision);
 		FlxG.collide(NapeProjectile.projectiles, Goblin.goblins, handleGoblinCollision);
 
@@ -119,9 +121,13 @@ class PlayState extends FlxNapeState
 
 	private function handlePlayerCollision(projectile:NapeProjectile, goblin:FlxSprite)
 	{
-		projectile.stop();
+		projectile.stop(goblin.x + 2, goblin.x + goblin.width - 8);
 		player.arrows.push(projectile.spawnedArrow);
 		projectile.countUpBlocked();
+
+		// Keep the player group on top
+		remove(player, true);
+		add(player);
 	}
 
 	private function handleGoblinCollision(projectile:NapeProjectile, goblin:Goblin)

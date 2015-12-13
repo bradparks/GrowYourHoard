@@ -22,7 +22,7 @@ class PlayerGroup extends FlxGroup
 
 	private var dashtimer:Timer;
 	private var dashing:Bool;
-	
+
 	private var keyboardInputs = [
 		"left" => [
 			"A",
@@ -90,15 +90,13 @@ class PlayerGroup extends FlxGroup
 		}
 		if (!dashing)
 		{
-				var flipArrows:Bool;
-				var i:Int;
+			var flipArrows:Bool = (goblin.flipX != oldFlipX);
+			var i:Int;
+
 			if (deltaX != 0 && Math.abs(deltaX) < 3)
 			{
 				goblin.animation.play("main");
 				goblin.x += deltaX;
-				
-
-				flipArrows= (goblin.flipX != oldFlipX);
 
 				for (i in 0...arrows.length)
 				{
@@ -110,20 +108,21 @@ class PlayerGroup extends FlxGroup
 				}
 			}
 			else if ( Math.abs(deltaX) > 2)
-			{				
+			{
 				FlxTween.tween(goblin, { x: goblin.x + deltaX }, .2);
 				dashing = true;
 				dashtimer = new Timer(200);
 				dashtimer.run = clearDashing;
-				flipArrows = (goblin.flipX != oldFlipX);
-				if (!goblin.flipX)
+
+				if (goblin.flipX)
 				{
-					goblin.allowCollisions = FlxObject.RIGHT;
+					goblin.allowCollisions = FlxObject.LEFT;
 				}
 				else
 				{
 					goblin.allowCollisions = FlxObject.RIGHT;
 				}
+
 				for (i in 0...arrows.length)
 				{
 					FlxTween.tween(arrows[i], { x: arrows[i].x + deltaX }, .2);
@@ -139,7 +138,7 @@ class PlayerGroup extends FlxGroup
 			goblin.animation.frameIndex = 2;
 		}
 	}
-	
+
 	private function clearDashing()
 	{
 		dashing = false;
@@ -147,7 +146,7 @@ class PlayerGroup extends FlxGroup
 		dashtimer = null;
 		goblin.allowCollisions = FlxObject.CEILING;
 	}
-	
+
 	private function resetDoubleTap(direction:String = "")
 	{
 		doubleTapDuration = 0.0;
