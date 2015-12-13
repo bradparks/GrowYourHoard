@@ -121,7 +121,7 @@ class PlayState extends FlxNapeState
 
 	private function handlePlayerCollision(projectile:NapeProjectile, goblin:FlxSprite)
 	{
-		projectile.stop();
+		projectile.stop(goblin.x + 2, goblin.x + goblin.width - 8);
 		player.arrows.push(projectile.spawnedArrow);
 		projectile.countUpBlocked();
 

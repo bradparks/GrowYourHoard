@@ -29,12 +29,11 @@ class NapeProjectile extends FlxNapeSprite
 		setupBodies();
 		countUpLaunched();
 	}
-	
+
 	public function setupGraphics()
 	{
-		
 	}
-	
+
 	public function setupBodies()
 	{
 		solid = true;
@@ -44,25 +43,26 @@ class NapeProjectile extends FlxNapeSprite
 
 		body.shapes.at(0).material.density = .5;
 		body.applyImpulse(new Vec2(-8 * FlxRandom.floatRanged(.15, 1), -8 * FlxRandom.floatRanged(.15, 1)));
-
 	}
-	
+
 	public function countUpLaunched()
 	{
 	}
-	
+
 	public function countUpBlocked()
 	{
 	}
-	
+
 	public function getSpawnedSprite(x:Float,y:Float):FlxSprite
 	{
-		return new FlxSprite(x,y);
+		return new FlxSprite(x, y);
 	}
-	
-	public function stop()
+
+	public function stop(minX:Float, maxX:Float)
 	{
-		spawnedArrow = getSpawnedSprite(x,y);
+		var newX:Float = (x < minX ? minX : (x > maxX ? maxX : x));
+
+		spawnedArrow = getSpawnedSprite(newX, y);
 		deadProjectiles.add(spawnedArrow);
 		FlxG.state.add(deadProjectiles);
 
@@ -76,7 +76,7 @@ class NapeProjectile extends FlxNapeSprite
 
 		if (this.y > 203)
 		{
-			this.stop();
+			this.stop(x, x);
 		}
 	}
 }

@@ -19,9 +19,11 @@ class Button extends FlxGroup
 	public function new(x, y, width, height, backgroundSpriteFile, textString, click)
 	{
 		super();
+
 		background = new FlxSprite(x, y, backgroundSpriteFile);
 		background.setGraphicSize(width, height);
 		background.updateHitbox();
+
 		text = new FlxText(x, y + height/8, width);
 		text.text = textString;
 		text.setFormat("assets/fonts/Our-Arcade-Games.ttf", height - height/4, FlxColor.GOLDEN, "center");
@@ -30,17 +32,19 @@ class Button extends FlxGroup
 		clickRegion = new FlxSprite(x, y);
 		clickRegion.makeGraphic(width, height);
 		clickRegion.alpha = 0;
+
 		add(background);
 		add(text);
 		add(clickRegion);
-		MouseEventManager.add(clickRegion, null, click, over, out,false,true,false);
+
+		MouseEventManager.add(clickRegion, null, click, over, out, false, true, false);
 	}
-	
+
 	public function over(sprite:FlxSprite)
 	{
 		clickRegion.alpha = 0.2;
 	}
-	
+
 	public function out(sprite:FlxSprite)
 	{
 		clickRegion.alpha = 0;

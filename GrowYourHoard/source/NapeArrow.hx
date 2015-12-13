@@ -9,32 +9,32 @@ import flixel.FlxSprite;
 class NapeArrow extends NapeProjectile
 {
 	public static var arrows:FlxGroup = null;
-	public function new(X:Float=0, Y:Float=0) 
+	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
 		NapeProjectile.projectiles.add(arrows);
 	}
-	
-	override public function setupGraphics() 
+
+	override public function setupGraphics()
 	{
 		super.setupGraphics();
 		loadGraphic(AssetPaths.arrow__png, false, 8, 8);
 	}
-	
-	override public function countUpLaunched() 
+
+	override public function countUpLaunched()
 	{
 		super.countUpLaunched();
-		Reg.counters["axes_launched"] += 1;
+		Reg.counters["arrows_launched"] += 1;
 	}
-	
-	override public function countUpBlocked() 
+
+	override public function countUpBlocked()
 	{
 		super.countUpBlocked();
 		Reg.counters["arrows_blocked"] += 1;
 	}
-	
-	override public function getSpawnedSprite(x:Float,y:Float):FlxSprite 
+
+	override public function getSpawnedSprite(x:Float,y:Float):FlxSprite
 	{
-		return new Arrow(x,y);
+		return new Arrow(x, y);
 	}
 }
