@@ -25,6 +25,8 @@ class MenuState extends FlxState
 	{
 		super.create();
 
+		FlxG.autoPause = false;
+		
 		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
 		
 		goblin = new FlxSprite(130, 100);
