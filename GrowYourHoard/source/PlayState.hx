@@ -64,8 +64,8 @@ class PlayState extends FlxNapeState
 		spawnTimer = new Timer(Math.floor(2000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		spawnTimer.run = spawn;
 
-		spawn();		
-		
+		spawn();
+
 		//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
 		shootTimer = new Timer(Math.floor(1000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		shootTimer.run = shoot;
@@ -76,8 +76,6 @@ class PlayState extends FlxNapeState
 		Reg.level += 1;
 		levelTimer = new Timer((30 + Reg.level) * 1000);
 		levelTimer.run = endLevel;
-
-		trace(Reg.upgrades);
 	}
 
 	/**
@@ -125,7 +123,7 @@ class PlayState extends FlxNapeState
 		spawnTimer.stop();
 		spawnTimer = new Timer(Math.floor(2000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		spawnTimer.run = spawn;
-		
+
 		if (Reg.upgrades["greedy_goblin"]["number"] > 0)
 		{
 			Reg.upgrades["greedy_goblin"]["number"] -= 1;
@@ -146,7 +144,6 @@ class PlayState extends FlxNapeState
 
 	private function shoot()
 	{
-		trace(shoot);
 		shootTimer.stop();
 		shootTimer = new Timer(Math.floor(1000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		shootTimer.run = shoot;
@@ -154,8 +151,6 @@ class PlayState extends FlxNapeState
 		add(NapeArrow.arrows);
 	}
 
-	
-	
 	private function endLevel()
 	{
 		Goblin.goblins.destroy();

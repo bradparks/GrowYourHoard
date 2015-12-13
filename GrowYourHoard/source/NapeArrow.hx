@@ -19,7 +19,7 @@ class NapeArrow extends FlxNapeSprite
 {
 	public static var arrows:FlxGroup = null;
 	public var spawnedArrow:Arrow;
-	
+
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
@@ -54,11 +54,5 @@ class NapeArrow extends FlxNapeSprite
 		{
 			this.stop();
 		}
-	}
-
-	override public function destroy():Void
-	{
-		NapeArrow.arrows.remove(this, true);
-		super.destroy();
 	}
 }

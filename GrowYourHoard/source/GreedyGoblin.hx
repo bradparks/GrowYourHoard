@@ -15,7 +15,7 @@ class GreedyGoblin extends Goblin
 	{
 		super.update();
 
-		if (FlxRandom.chanceRoll(0.5))
+		if (FlxRandom.chanceRoll(1))
 		{
 			moves = !moves;
 			animation.play(moves ? "walking" : "stopped");
