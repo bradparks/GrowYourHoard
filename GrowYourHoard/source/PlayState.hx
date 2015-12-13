@@ -13,6 +13,7 @@ import haxe.Timer;
 import nape.space.Space;
 import nape.geom.Vec2;
 import flixel.addons.nape.FlxNapeState;
+import flixel.util.FlxRandom;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -23,6 +24,7 @@ class PlayState extends FlxNapeState
 	private var castle:FlxSprite;
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
+	private var shootTimer:Timer;
 	private var levelTimer:Timer;
 	private var player:PlayerGroup;
 
@@ -59,10 +61,15 @@ class PlayState extends FlxNapeState
 		add(scoreText);
 
 		//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
-		spawnTimer = new Timer(2000);
+		spawnTimer = new Timer(Math.floor(2000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		spawnTimer.run = spawn;
 
-		spawn();
+		spawn();		
+		
+		//Keeps mass created units from updating at the exact same time. Idea from: http://answers.unity3d.com/questions/419786/a-pathfinding-multiple-enemies-MOVING-target-effic.html
+		shootTimer = new Timer(Math.floor(1000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
+		shootTimer.run = shoot;
+
 
 		FlxNapeState.space.gravity.setxy(0, 500);
 
@@ -115,9 +122,10 @@ class PlayState extends FlxNapeState
 
 	private function spawn()
 	{
-		NapeArrow.arrows.add(new NapeArrow(250, 20));
-		add(NapeArrow.arrows);
-
+		spawnTimer.stop();
+		spawnTimer = new Timer(Math.floor(2000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
+		spawnTimer.run = spawn;
+		
 		if (Reg.upgrades["greedy_goblin"]["number"] > 0)
 		{
 			Reg.upgrades["greedy_goblin"]["number"] -= 1;
@@ -136,6 +144,18 @@ class PlayState extends FlxNapeState
 		add(Goblin.goblins);
 	}
 
+	private function shoot()
+	{
+		trace(shoot);
+		shootTimer.stop();
+		shootTimer = new Timer(Math.floor(1000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
+		shootTimer.run = shoot;
+		NapeArrow.arrows.add(new NapeArrow(250, 20));
+		add(NapeArrow.arrows);
+	}
+
+	
+	
 	private function endLevel()
 	{
 		Goblin.goblins.destroy();
@@ -143,6 +163,7 @@ class PlayState extends FlxNapeState
 		Arrow.arrows.destroy();
 
 		spawnTimer.stop();
+		shootTimer.stop();
 		levelTimer.stop();
 
 		FlxG.mouse.visible = true;
