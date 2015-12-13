@@ -14,6 +14,10 @@ class Reg
 	];
 
 	public static var upgrades = [
+		"goblin" => [
+			"cost"   => 0,
+			"number" => 999999999
+		],
 		"greedy_goblin" => [
 			"cost"   => 1,
 			"number" => 0

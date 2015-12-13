@@ -50,6 +50,12 @@ class Goblin extends FlxSprite
 		}
 	}
 
+	override public function kill():Void
+	{
+		super.kill();
+		Reg.upgrades[getUnitTag()]["number"] -= 1;
+	}
+
 	private function getScore()
 	{
 		return 1;
@@ -58,5 +64,10 @@ class Goblin extends FlxSprite
 	private function getTargetY()
 	{
 		return 197;
+	}
+
+	private function getUnitTag()
+	{
+		return "goblin";
 	}
 }

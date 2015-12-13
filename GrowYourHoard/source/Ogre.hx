@@ -27,4 +27,9 @@ class Ogre extends Goblin
 	{
 		return 170;
 	}
+
+	override private function getUnitTag()
+	{
+		return "ogre";
+	}
 }

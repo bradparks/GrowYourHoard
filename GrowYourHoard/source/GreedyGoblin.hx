@@ -29,7 +29,7 @@ class GreedyGoblin extends Goblin
 		flipX = true;
 
 		animation.add("walking", [0, 1], 4, true);
-		animation.add("stopped", [0, 2, 3], 4, true);
+		animation.add("stopped", [2, 3], 4, true);
 		animation.play("walking");
 
 		Reg.counters["greedy_goblins_launched"] += 1;
@@ -40,5 +40,10 @@ class GreedyGoblin extends Goblin
 	override private function getScore()
 	{
 		return 3;
+	}
+
+	override private function getUnitTag()
+	{
+		return "greedy_goblin";
 	}
 }

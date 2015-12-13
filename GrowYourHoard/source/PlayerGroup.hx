@@ -43,29 +43,47 @@ class PlayerGroup extends FlxGroup
 	{
 		super.update();
 		var i:Int;
+		var oldFlipX = goblin.flipX;
+
 		if (!(FlxG.keys.anyPressed(["A", "D"]) || FlxG.mouse.pressed || FlxG.mouse.pressedRight))
 		{
 			goblin.animation.frameIndex = 0;
 			goblin.animation.pause();
 		}
+
 		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT || FlxG.mouse.pressed)
 		{
 			goblin.animation.play("main");
 			goblin.flipX = true;
 			goblin.x -= 2;
+
+			var flipArrows:Bool = (goblin.flipX != oldFlipX);
+
 			for (i in 0...arrows.length)
 			{
 				arrows[i].x -= 2;
+				if (flipArrows)
+				{
+					arrows[i].flipX = !arrows[i].flipX;
+				}
 			}
 		}
+
 		if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT || FlxG.mouse.pressedRight)
 		{
 			goblin.animation.play("main");
 			goblin.flipX = false;
 			goblin.x += 2;
+
+			var flipArrows:Bool = (goblin.flipX != oldFlipX);
+
 			for (i in 0...arrows.length)
 			{
 				arrows[i].x += 2;
+				if (flipArrows)
+				{
+					arrows[i].flipX = !arrows[i].flipX;
+				}
 			}
 		}
 	}
