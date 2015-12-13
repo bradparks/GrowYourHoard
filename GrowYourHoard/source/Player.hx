@@ -1,4 +1,3 @@
-package;
 
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -14,11 +13,22 @@ class Player extends FlxSprite
 	{
 		super(X, Y);
 
-		allowCollisions = FlxObject.CEILING;
+		solid = true;
 		immovable = true;
-		loadGraphic("assets/images/shield.png",true, 8, 16);
-		animation.add("main",[0,1],4,true);
-		setGraphicSize(20, 40);
+
+		if (Reg.upgrades["large_shield"]["number"] > 0)
+		{
+			Reg.upgrades["large_shield"]["number"] -= 1;
+			loadGraphic("assets/images/shieldbigger.png", true, 12, 16);
+			setGraphicSize(30, 40);
+		}
+		else
+		{
+			loadGraphic("assets/images/shield.png", true, 8, 16);
+			setGraphicSize(20, 40);
+		}
+
+		animation.add("main", [0,1], 4, true);
 	}
 
 	override public function update():Void
