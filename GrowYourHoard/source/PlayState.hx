@@ -24,7 +24,7 @@ class PlayState extends FlxNapeState
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
 	private var levelTimer:Timer;
-	private var player:Player;
+	private var player:PlayerGroup;
 
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -49,7 +49,7 @@ class PlayState extends FlxNapeState
 		castle.solid = false;
 		add(castle);
 
-		player = new Player(60, 157);
+		player = new PlayerGroup(60, 157);
 		add(player);
 
 		scoreText = new FlxText(0, 0, 320);
@@ -69,6 +69,8 @@ class PlayState extends FlxNapeState
 		Reg.level += 1;
 		levelTimer = new Timer((30 + Reg.level) * 1000);
 		levelTimer.run = endLevel;
+
+		trace(Reg.upgrades);
 	}
 
 	/**
@@ -88,7 +90,7 @@ class PlayState extends FlxNapeState
 		super.update();
 		scoreText.text = Reg.score+"";
 
-		FlxG.collide(NapeArrow.arrows, player, handlePlayerCollision);
+		FlxG.collide(NapeArrow.arrows, player.goblin, handlePlayerCollision);
 		FlxG.collide(NapeArrow.arrows, Goblin.goblins, handleGoblinCollision);
 
 		if (FlxG.keys.justPressed.G)
@@ -97,9 +99,11 @@ class PlayState extends FlxNapeState
 		}
 	}
 
-	private function handlePlayerCollision(arrow:NapeArrow, player:Player)
+	private function handlePlayerCollision(arrow:NapeArrow, goblin:FlxSprite)
 	{
 		arrow.stop();
+		player.arrows.push(arrow.spawnedArrow);
+		arrow.spawnedArrow.y += 5;
 		Reg.counters["arrows_blocked"] += 1;
 	}
 

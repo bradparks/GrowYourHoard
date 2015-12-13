@@ -18,7 +18,8 @@ import flixel.util.FlxRandom;
 class NapeArrow extends FlxNapeSprite
 {
 	public static var arrows:FlxGroup = null;
-
+	public var spawnedArrow:Arrow;
+	
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
@@ -37,7 +38,8 @@ class NapeArrow extends FlxNapeSprite
 
 	public function stop()
 	{
-		Arrow.arrows.add(new Arrow(this.x, this.y));
+		spawnedArrow = new Arrow(this.x, this.y);
+		Arrow.arrows.add(spawnedArrow);
 		FlxG.state.add(Arrow.arrows);
 
 		this.destroy();
