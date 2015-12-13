@@ -16,34 +16,35 @@ class HoardState extends FlxState
 {
 	private var subHead:FlxText;
 	private var head:FlxText;
+	private var scoreText:FlxText;
 	private var menuButtons:FlxGroup;
 
 	private static var buttons = [
 		"NEXT LEVEL" => [
-			"x"        => 50,
+			"x"        => 40,
 			"y"        => 200,
-			"width"    => 220,
+			"width"    => 240,
 			"height"   => 30,
 			"callback" => 0
 		],
 		"OGRE" => [
-			"x"        => 50,
+			"x"        => 40,
 			"y"        => 155,
-			"width"    => 220,
+			"width"    => 240,
 			"height"   => 30,
 			"callback" => 1
 		],
 		"GREEDY GOBLIN" => [
-			"x"        => 50,
+			"x"        => 40,
 			"y"        => 120,
-			"width"    => 220,
+			"width"    => 240,
 			"height"   => 30,
 			"callback" => 2
 		],
 		"LARGE SHIELD" => [
-			"x"        => 50,
+			"x"        => 40,
 			"y"        => 85,
-			"width"    => 220,
+			"width"    => 240,
 			"height"   => 30,
 			"callback" => 3
 		]
@@ -65,6 +66,12 @@ class HoardState extends FlxState
 		subHead.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
 		subHead.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(subHead);
+		
+		scoreText = new FlxText(235, 40, 50);
+		scoreText.text = Reg.score+"";
+		scoreText.setFormat("assets/fonts/Our-Arcade-Games.ttf", 20, FlxColor.GOLDEN, "center");
+		scoreText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
+		add(scoreText);
 
 		head = new FlxText(0, 35, 320);
 		head.text = "HOARD";
@@ -91,6 +98,7 @@ class HoardState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		scoreText.text = Reg.score+"";
 	}
 
 	private function buy(itemOrUnitName:String)
@@ -130,6 +138,12 @@ class HoardState extends FlxState
 			buyGreedyGoblin,
 			buyShield
 		];
+		var callbacksWorth = [
+			"",
+			"1",
+			"1",
+			"5"
+		];
 
 		for (buttonName in buttons.keys())
 		{
@@ -138,7 +152,7 @@ class HoardState extends FlxState
 										   buttons[buttonName]["width"],
 										   buttons[buttonName]["height"],
 										   "assets/images/button.png",
-										   buttonName);
+										   buttonName+" "+callbacksWorth[buttons[buttonName]["callback"]]);
 
 			menuButtons.add(button);
 

@@ -22,6 +22,7 @@ class PlayState extends FlxNapeState
 {
 	private var background:FlxSprite;
 	private var castle:FlxSprite;
+	private var fire:FlxSprite;
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
 	private var shootTimer:Timer;
@@ -46,6 +47,12 @@ class PlayState extends FlxNapeState
 		background.solid = false;
 		add(background);
 
+		fire = new FlxSprite(255, 30);
+		fire.loadGraphic("assets/images/fire.png", true, 68, 80);
+		fire.animation.add("main", [0, 1, 2], 10);
+		fire.animation.play("main");
+		add(fire);
+		
 		castle = new FlxSprite(250, 57, "assets/images/castle.png");
 		castle.moves = false;
 		castle.solid = false;
