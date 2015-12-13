@@ -15,6 +15,19 @@ class PlayerGroup extends FlxGroup
 	public var goblin:FlxSprite;
 	public var arrows:Array<FlxSprite> = [];
 
+	private var doubleTapDuration:Float = 0.0;
+	private var doubleTapDirection:String = "";
+	private var keyboardInputs = [
+		"left" => [
+			"A",
+			"LEFT"
+		],
+		"right" => [
+			"D",
+			"RIGHT"
+		]
+	];
+
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super();
@@ -44,49 +57,107 @@ class PlayerGroup extends FlxGroup
 	override public function update():Void
 	{
 		super.update();
-		var i:Int;
-		var oldFlipX = goblin.flipX;
 
-		if (!(FlxG.keys.anyPressed(["A", "D"]) || FlxG.mouse.pressed || FlxG.mouse.pressedRight))
+		var processLeft:Bool = hasLeftInput();
+		var processRight:Bool = hasRightInput();
+
+		if (!processLeft && !processRight)
 		{
 			goblin.animation.frameIndex = 0;
 			goblin.animation.pause();
+			return;
 		}
 
-		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT || FlxG.mouse.pressed)
+		var deltaX:Int = performDoubleTap();
+		var oldFlipX = goblin.flipX;
+
+		if (processLeft)
 		{
-			goblin.animation.play("main");
 			goblin.flipX = true;
-			goblin.x -= 2;
-
-			var flipArrows:Bool = (goblin.flipX != oldFlipX);
-
-			for (i in 0...arrows.length)
-			{
-				arrows[i].x -= 2;
-				if (flipArrows)
-				{
-					arrows[i].flipX = !arrows[i].flipX;
-				}
-			}
+			deltaX += -2;
 		}
 
-		if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT || FlxG.mouse.pressedRight)
+		if (processRight)
+		{
+			goblin.flipX = false;
+			deltaX += 2;
+		}
+
+		if (deltaX != 0)
 		{
 			goblin.animation.play("main");
-			goblin.flipX = false;
-			goblin.x += 2;
+			goblin.x += deltaX;
 
 			var flipArrows:Bool = (goblin.flipX != oldFlipX);
+			var i:Int;
 
 			for (i in 0...arrows.length)
 			{
-				arrows[i].x += 2;
+				arrows[i].x += deltaX;
 				if (flipArrows)
 				{
 					arrows[i].flipX = !arrows[i].flipX;
 				}
 			}
 		}
+	}
+
+	private function resetDoubleTap(direction:String = "")
+	{
+		doubleTapDuration = 0.0;
+		doubleTapDirection = direction;
+	}
+
+	private function processDoubleTapInput(direction:String, possibleDeltaX:Int)
+	{
+		var deltaX:Int = 0;
+
+		if (doubleTapDirection == direction)
+		{
+			deltaX = possibleDeltaX;
+			resetDoubleTap();
+		}
+		else
+		{
+			resetDoubleTap(direction);
+		}
+
+		return deltaX;
+	}
+
+	private function performDoubleTap()
+	{
+		var deltaX:Int = 0;
+
+		if (doubleTapDuration > 0.1)
+		{
+			resetDoubleTap();
+		}
+
+		if (doubleTapDirection != "")
+		{
+			doubleTapDuration += FlxG.elapsed;
+		}
+
+		if (FlxG.keys.anyJustPressed(keyboardInputs["left"]) || FlxG.mouse.justPressed)
+		{
+			deltaX = processDoubleTapInput("left", -50);
+		}
+		else if (FlxG.keys.anyJustPressed(keyboardInputs["right"]) || FlxG.mouse.justPressedRight)
+		{
+			deltaX = processDoubleTapInput("right", 50);
+		}
+
+		return deltaX;
+	}
+
+	private function hasLeftInput()
+	{
+		return FlxG.keys.anyPressed(keyboardInputs["left"]) || FlxG.mouse.pressed;
+	}
+
+	private function hasRightInput()
+	{
+		return FlxG.keys.anyPressed(keyboardInputs["right"]) || FlxG.mouse.pressedRight;
 	}
 }
