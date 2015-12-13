@@ -42,7 +42,8 @@ class NapeArrow extends FlxNapeSprite
 		Arrow.arrows.add(spawnedArrow);
 		FlxG.state.add(Arrow.arrows);
 
-		this.destroy();
+		this.x = -1;
+		kill();
 	}
 
 	override public function update():Void
