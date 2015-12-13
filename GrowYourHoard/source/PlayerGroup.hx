@@ -38,13 +38,15 @@ class PlayerGroup extends FlxGroup
 		if (Reg.upgrades["large_shield"]["number"] > 0)
 		{
 			Reg.upgrades["large_shield"]["number"] -= 1;
-			goblin.loadGraphic("assets/images/shieldbigger.png", true, 12, 16);
-			goblin.setGraphicSize(30, 40);
+			goblin.loadGraphic("assets/images/shieldbigger.png", true, 12, 10);
+			goblin.setGraphicSize(30, 25);
+			goblin.updateHitbox();
 		}
 		else
 		{
-			goblin.loadGraphic("assets/images/shield.png", true, 8, 16);
-			goblin.setGraphicSize(20, 40);
+			goblin.loadGraphic("assets/images/shield.png", true, 8, 10);
+			goblin.setGraphicSize(20, 25);
+			goblin.updateHitbox();
 		}
 
 		goblin.animation.add("main", [0,1], 4, true);
