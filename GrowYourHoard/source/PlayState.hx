@@ -28,6 +28,7 @@ class PlayState extends FlxNapeState
 	private var shootTimer:Timer;
 	private var levelTimer:Timer;
 	private var player:PlayerGroup;
+	private var lastScore:Int;
 
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -37,8 +38,10 @@ class PlayState extends FlxNapeState
 		super.create();
 
 		Goblin.goblins = new FlxGroup();
+		NapeProjectile.projectiles = new FlxGroup();
+		NapeProjectile.deadProjectiles = new FlxGroup();
 		NapeArrow.arrows = new FlxGroup();
-		Arrow.arrows = new FlxGroup();
+		NapeAxe.axes = new FlxGroup();
 
 		FlxG.mouse.visible = false;
 
@@ -105,8 +108,8 @@ class PlayState extends FlxNapeState
 			scoreText.text = Reg.score+"";
 			FlxG.sound.play(AssetPaths.coin__wav);
 		}
-		FlxG.collide(NapeArrow.arrows, player.goblin, handlePlayerCollision);
-		FlxG.collide(NapeArrow.arrows, Goblin.goblins, handleGoblinCollision);
+		FlxG.collide(NapeProjectile.projectiles, player.goblin, handlePlayerCollision);
+		FlxG.collide(NapeProjectile.projectiles, Goblin.goblins, handleGoblinCollision);
 
 		if (FlxG.keys.justPressed.G)
 		{
@@ -114,18 +117,18 @@ class PlayState extends FlxNapeState
 		}
 	}
 
-	private function handlePlayerCollision(arrow:NapeArrow, goblin:FlxSprite)
+	private function handlePlayerCollision(projectile:NapeProjectile, goblin:FlxSprite)
 	{
-		arrow.stop();
-		player.arrows.push(arrow.spawnedArrow);
-		arrow.spawnedArrow.y += 5;
-		Reg.counters["arrows_blocked"] += 1;
+		projectile.stop();
+		player.arrows.push(projectile.spawnedArrow);
+		projectile.spawnedArrow.y += 5;
+		projectile.countUpBlocked();
 	}
 
-	private function handleGoblinCollision(arrow:NapeArrow, goblin:Goblin)
+	private function handleGoblinCollision(projectile:NapeProjectile, goblin:Goblin)
 	{
-		goblin.hurt(1.0);
-		arrow.destroy();
+		goblin.hurt(projectile.damage);
+		projectile.destroy();
 		FlxG.sound.play(AssetPaths.hit__wav);
 	}
 
@@ -156,16 +159,25 @@ class PlayState extends FlxNapeState
 		shootTimer.stop();
 		shootTimer = new Timer(Math.floor(1000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		shootTimer.run = shoot;
-		NapeArrow.arrows.add(new NapeArrow(250, 70));
-		add(NapeArrow.arrows);
-		FlxG.sound.play(AssetPaths.arrowshoot__wav);
+		if (Math.random() > .1 + Reg.level/30)
+		{
+			NapeArrow.arrows.add(new NapeArrow(250, 70));
+			add(NapeArrow.arrows);
+			FlxG.sound.play(AssetPaths.arrowshoot__wav);
+		}
+		else
+		{
+			NapeAxe.axes.add(new NapeAxe(250, 70));
+			add(NapeAxe.axes);
+			FlxG.sound.play(AssetPaths.arrowshoot__wav);
+		}
 	}
 
 	private function endLevel()
 	{
 		Goblin.goblins.destroy();
-		NapeArrow.arrows.destroy();
-		Arrow.arrows.destroy();
+		NapeProjectile.projectiles.destroy();
+		NapeProjectile.deadProjectiles.destroy();
 
 		spawnTimer.stop();
 		shootTimer.stop();

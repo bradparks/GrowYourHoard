@@ -11,7 +11,7 @@ import flixel.util.FlxVelocity;
  */
 class Goblin extends FlxSprite
 {
-	public static var goblins:FlxGroup = null;
+	public static var goblins:FlxGroup = new FlxGroup();
 
 	public function new(X:Float=0, Y:Float=0, unitHealth:Float=1.0, ?SimpleGraphic:Dynamic)
 	{

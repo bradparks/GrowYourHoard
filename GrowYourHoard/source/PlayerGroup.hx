@@ -13,7 +13,7 @@ import Arrow;
 class PlayerGroup extends FlxGroup
 {
 	public var goblin:FlxSprite;
-	public var arrows:Array<Arrow> = [];
+	public var arrows:Array<FlxSprite> = [];
 
 	private var doubleTapDuration:Float = 0.0;
 	private var doubleTapDirection:String = "";
