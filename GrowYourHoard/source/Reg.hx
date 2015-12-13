@@ -5,9 +5,24 @@ class Reg
 	public static var score:Int = 0;
 	public static var level:Int = 0;
 
-	public static var counters:Map<String, Int> = [
+	public static var counters = [
 		"goblins_launched" => 0,
 		"arrows_launched"  => 0,
 		"arrows_blocked"   => 0
+	];
+
+	public static var upgrades = [
+		"greedy_goblin" => [
+			"cost"   => 1,
+			"number" => 0
+		],
+		"ogre" => [
+			"cost"   => 1,
+			"number" => 0
+		],
+		"large_shield" => [
+			"cost"   => 5,
+			"number" => 0
+		]
 	];
 }
