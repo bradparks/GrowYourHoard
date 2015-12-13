@@ -1,24 +1,28 @@
 package;
-import flixel.group.FlxGroup;
 import flixel.FlxSprite;
+import flixel.group.FlxGroup;
 
 /**
  * ...
  * @author John Doughty
  */
-class NapeArrow extends NapeProjectile
+class NapeAxe extends NapeProjectile
 {
-	public static var arrows:FlxGroup = null;
+	public static var axes:FlxGroup =  null;
+	
 	public function new(X:Float=0, Y:Float=0) 
 	{
 		super(X, Y);
-		NapeProjectile.projectiles.add(arrows);
+		damage = 5;
+		NapeProjectile.projectiles.add(axes);
 	}
-	
+		
 	override public function setupGraphics() 
 	{
 		super.setupGraphics();
-		loadGraphic(AssetPaths.arrow__png, false, 8, 8);
+		loadGraphic(AssetPaths.axe__png, false, 8, 8);
+		animation.add("main", [0,1,2,3], 10, true);
+		animation.play("main");
 	}
 	
 	override public function countUpLaunched() 
@@ -30,11 +34,11 @@ class NapeArrow extends NapeProjectile
 	override public function countUpBlocked() 
 	{
 		super.countUpBlocked();
-		Reg.counters["arrows_blocked"] += 1;
+		Reg.counters["axes_blocked"] += 1;
 	}
 	
 	override public function getSpawnedSprite(x:Float,y:Float):FlxSprite 
 	{
-		return new Arrow(x,y);
+		return new Axe(x,y);
 	}
 }

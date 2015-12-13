@@ -10,6 +10,8 @@ class Reg
 		"greedy_goblins_launched" => 0,
 		"ogres_launched"          => 0,
 		"arrows_launched"         => 0,
+		"axes_launched"         => 0,
+		"axes_blocked"          => 0,
 		"arrows_blocked"          => 0
 	];
 

@@ -13,7 +13,7 @@ import Arrow;
 class PlayerGroup extends FlxGroup
 {
 	public var goblin:FlxSprite;
-	public var arrows:Array<Arrow> = [];
+	public var arrows:Array<FlxSprite> = [];
 
 	public function new(X:Float=0, Y:Float=0)
 	{

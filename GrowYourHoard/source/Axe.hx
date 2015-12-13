@@ -7,13 +7,13 @@ import flixel.group.FlxGroup;
  * ...
  * @author John Doughty
  */
-class Arrow extends FlxSprite
+class Axe extends FlxSprite
 {
-	
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
-		loadGraphic(AssetPaths.arrow__png, false, 8, 8);
+		loadGraphic(AssetPaths.axe__png, false, 8, 8);
+		animation.frameIndex = 3;
 
 		solid = false;
 		antialiasing = true;
