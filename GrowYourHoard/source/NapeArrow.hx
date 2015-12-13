@@ -50,7 +50,7 @@ class NapeArrow extends FlxNapeSprite
 	{
 		super.update();
 
-		if (this.y > 177)
+		if (this.y > 203)
 		{
 			this.stop();
 		}

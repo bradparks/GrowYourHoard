@@ -46,12 +46,12 @@ class PlayState extends FlxNapeState
 		background.solid = false;
 		add(background);
 
-		castle = new FlxSprite(250, 32, "assets/images/castle.png");
+		castle = new FlxSprite(250, 57, "assets/images/castle.png");
 		castle.moves = false;
 		castle.solid = false;
 		add(castle);
 
-		player = new PlayerGroup(60, 157);
+		player = new PlayerGroup(60, 182);
 		add(player);
 
 		scoreText = new FlxText(0, 0, 320);
@@ -76,8 +76,6 @@ class PlayState extends FlxNapeState
 		Reg.level += 1;
 		levelTimer = new Timer((30 + Reg.level) * 1000);
 		levelTimer.run = endLevel;
-
-		trace(Reg.upgrades);
 	}
 
 	/**
@@ -126,19 +124,19 @@ class PlayState extends FlxNapeState
 		spawnTimer = new Timer(Math.floor(2000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		spawnTimer.run = spawn;
 		
-		if (Reg.upgrades["greedy_goblin"]["number"] > 0)
+		if (Reg.upgrades["greedy_goblin"]["number"] > 0 && Math.random() > 0.8)
 		{
 			Reg.upgrades["greedy_goblin"]["number"] -= 1;
-			Goblin.goblins.add(new GreedyGoblin(260, 172));
+			Goblin.goblins.add(new GreedyGoblin(260, 197));
 		}
-		else if (Reg.upgrades["ogre"]["number"] > 0)
+		else if (Reg.upgrades["ogre"]["number"] > 0 && Math.random() > 0.8)
 		{
 			Reg.upgrades["ogre"]["number"] -= 1;
-			Goblin.goblins.add(new Ogre(260, 145));
+			Goblin.goblins.add(new Ogre(260, 170));
 		}
 		else
 		{
-			Goblin.goblins.add(new Goblin(260, 172));
+			Goblin.goblins.add(new Goblin(260, 197));
 		}
 
 		add(Goblin.goblins);
@@ -146,7 +144,6 @@ class PlayState extends FlxNapeState
 
 	private function shoot()
 	{
-		trace(shoot);
 		shootTimer.stop();
 		shootTimer = new Timer(Math.floor(1000 * FlxRandom.floatRanged(.25*(100-Reg.level*2/100)/100,1*(100-Reg.level*2/100)/100)));
 		shootTimer.run = shoot;

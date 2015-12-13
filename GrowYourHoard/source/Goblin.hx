@@ -64,6 +64,6 @@ class Goblin extends FlxSprite
 
 	private function getTargetY()
 	{
-		return 172;
+		return 197;
 	}
 }

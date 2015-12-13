@@ -25,6 +25,6 @@ class Ogre extends Goblin
 
 	override private function getTargetY()
 	{
-		return 145;
+		return 170;
 	}
 }
