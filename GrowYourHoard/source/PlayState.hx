@@ -61,7 +61,7 @@ class PlayState extends FlxNapeState
 		castle.solid = false;
 		add(castle);
 
-		player = new PlayerGroup(60, 182);
+		player = new PlayerGroup(60, 186);
 		add(player);
 
 		scoreText = new FlxText(0, 0, 320);
@@ -121,7 +121,6 @@ class PlayState extends FlxNapeState
 	{
 		projectile.stop();
 		player.arrows.push(projectile.spawnedArrow);
-		projectile.spawnedArrow.y += 5;
 		projectile.countUpBlocked();
 	}
 
