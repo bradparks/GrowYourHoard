@@ -16,7 +16,7 @@ class Button extends FlxGroup
 	public var text:FlxText;
 	public var clickRegion:FlxSprite;
 
-	public function new(x, y, width, height, backgroundSpriteFile, textString, click)
+	public function new(x:Float, y:Float, width:Int, height:Int, backgroundSpriteFile:String, textString:String, click:Dynamic,?fontSize:Int)
 	{
 		super();
 		background = new FlxSprite(x, y, backgroundSpriteFile);
@@ -24,7 +24,7 @@ class Button extends FlxGroup
 		background.updateHitbox();
 		text = new FlxText(x, y + height/8, width);
 		text.text = textString;
-		text.setFormat("assets/fonts/Our-Arcade-Games.ttf", height - height/4, FlxColor.GOLDEN, "center");
+		text.setFormat("assets/fonts/Our-Arcade-Games.ttf", fontSize == null?height - height/4:fontSize, FlxColor.GOLDEN, "center");
 		text.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 
 		clickRegion = new FlxSprite(x, y);

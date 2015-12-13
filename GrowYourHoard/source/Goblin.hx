@@ -46,6 +46,7 @@ class Goblin extends FlxSprite
 		if (this.x < 0 - width)
 		{
 			Reg.score += getScore();
+
 			kill();
 		}
 	}
