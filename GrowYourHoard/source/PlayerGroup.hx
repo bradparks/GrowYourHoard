@@ -5,6 +5,8 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.group.FlxGroup;
 import Arrow;
+import flixel.tweens.FlxTween;
+import haxe.Timer;
 
 /**
  * ...
@@ -17,6 +19,10 @@ class PlayerGroup extends FlxGroup
 
 	private var doubleTapDuration:Float = 0.0;
 	private var doubleTapDirection:String = "";
+
+	private var dashtimer:Timer;
+	private var dashing:Bool;
+	
 	private var keyboardInputs = [
 		"left" => [
 			"A",
@@ -82,26 +88,66 @@ class PlayerGroup extends FlxGroup
 			goblin.flipX = false;
 			deltaX += 2;
 		}
-
-		if (deltaX != 0)
+		if (!dashing)
 		{
-			goblin.animation.play("main");
-			goblin.x += deltaX;
-
-			var flipArrows:Bool = (goblin.flipX != oldFlipX);
-			var i:Int;
-
-			for (i in 0...arrows.length)
+				var flipArrows:Bool;
+				var i:Int;
+			if (deltaX != 0 && Math.abs(deltaX) < 3)
 			{
-				arrows[i].x += deltaX;
-				if (flipArrows)
+				goblin.animation.play("main");
+				goblin.x += deltaX;
+				
+
+				flipArrows= (goblin.flipX != oldFlipX);
+
+				for (i in 0...arrows.length)
 				{
-					arrows[i].flipX = !arrows[i].flipX;
+					arrows[i].x += deltaX;
+					if (flipArrows)
+					{
+						arrows[i].flipX = !arrows[i].flipX;
+					}
+				}
+			}
+			else if ( Math.abs(deltaX) > 2)
+			{				
+				FlxTween.tween(goblin, { x: goblin.x + deltaX }, .2);
+				dashing = true;
+				dashtimer = new Timer(200);
+				dashtimer.run = clearDashing;
+				flipArrows = (goblin.flipX != oldFlipX);
+				if (!goblin.flipX)
+				{
+					goblin.allowCollisions = FlxObject.RIGHT;
+				}
+				else
+				{
+					goblin.allowCollisions = FlxObject.RIGHT;
+				}
+				for (i in 0...arrows.length)
+				{
+					FlxTween.tween(arrows[i], { x: arrows[i].x + deltaX }, .2);
+					if (flipArrows)
+					{
+						arrows[i].flipX = !arrows[i].flipX;
+					}
 				}
 			}
 		}
+		else
+		{
+			goblin.animation.frameIndex = 2;
+		}
 	}
-
+	
+	private function clearDashing()
+	{
+		dashing = false;
+		dashtimer.stop();
+		dashtimer = null;
+		goblin.allowCollisions = FlxObject.CEILING;
+	}
+	
 	private function resetDoubleTap(direction:String = "")
 	{
 		doubleTapDuration = 0.0;
