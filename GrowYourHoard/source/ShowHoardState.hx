@@ -39,11 +39,13 @@ class ShowHoardState extends FlxNapeState
 		head.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		head.scale.set(2, 2);
 		add(head);
+		add(new GoblinShow(250, 125));
 		scoreText = new FlxText(0, 100, 320);
 		scoreText.text = "0 Gold";
 		scoreText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
 		scoreText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(scoreText);
+		
 		
 		buyBtn = new Button(25, 155, 275, 80, AssetPaths.button__png, "Invest in Minions", buy,30);
 		add(buyBtn);

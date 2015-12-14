@@ -26,7 +26,7 @@ class Goblin extends FlxSprite
 
 	private function setup()
 	{
-		loadGraphic("assets/images/goblin1.png", true, 8, 8);
+		loadGraphic(AssetPaths.goblin1__png, true, 8, 8);
 		animation.add("main", [0, 1], 4, true);
 		setGraphicSize(20, 20);
 		flipX = true;
