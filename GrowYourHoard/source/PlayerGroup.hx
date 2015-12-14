@@ -138,9 +138,7 @@ class PlayerGroup extends FlxGroup
 		// Put arrows on top
 		if (!dashing)
 		{
-			projectilesInShield.angle = 0;
-			projectilesInShield.x = goblin.x;
-			projectilesInShield.y = goblin.y - projectilesInShield.height;
+			resetShieldProjectiles();
 		}
 		else
 		{
@@ -166,6 +164,15 @@ class PlayerGroup extends FlxGroup
 		dashtimer.stop();
 		dashtimer = null;
 		goblin.allowCollisions = FlxObject.CEILING;
+
+		resetShieldProjectiles();
+	}
+
+	private function resetShieldProjectiles()
+	{
+		projectilesInShield.angle = 0;
+		projectilesInShield.x = goblin.x;
+		projectilesInShield.y = goblin.y - projectilesInShield.height;
 	}
 
 	private function resetDoubleTap(direction:String = "")
