@@ -128,6 +128,13 @@ class PlayState extends FlxNapeState
 		var sourceRect:Rectangle = new Rectangle(0, 0, projectile.spawnedArrow.width, projectile.spawnedArrow.height);
 		var destPoint:Point = new Point(Std.int(projectile.spawnedArrow.x - player.projectilesInShield.x), player.projectilesInShield.height - projectile.spawnedArrow.height);
 
+		if (player.goblin.flipX)
+		{
+			destPoint.x = player.projectilesInShield.width - destPoint.x - 8;
+		}
+
+		projectile.spawnedArrow.flipX = player.goblin.flipX;
+
 		player.projectilesInShield.pixels.copyPixels(projectile.spawnedArrow.getFlxFrameBitmapData(), sourceRect, destPoint, null, null, true);
 		player.projectilesInShield.frame.destroyBitmapDatas();
 		player.projectilesInShield.dirty = true;
