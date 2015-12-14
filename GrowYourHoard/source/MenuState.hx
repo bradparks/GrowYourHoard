@@ -53,6 +53,8 @@ class MenuState extends FlxState
 
 		helpBtn = new Button(100, 185, 120, 30, AssetPaths.button__png, "HELP", help);
 		add(helpBtn);
+
+		FlxG.autoPause = false;
 	}
 
 	/**
