@@ -138,13 +138,13 @@ class PlayState extends FlxNapeState
 			napeDebugEnabled = !napeDebugEnabled;
 		}
 	}
-	
+
 	private function handleSoldierCollision(soldier:FlxSprite, goblin:FlxSprite)
 	{
 		goblin.hurt(5);
 		FlxG.sound.play(AssetPaths.hit__wav);
 	}
-	
+
 	private function hitSoldier(soldierHitBox:FlxSprite, goblin:FlxSprite)
 	{
 		if (player.dashing && !player.hasHit)
@@ -249,6 +249,14 @@ class PlayState extends FlxNapeState
 
 		FlxG.mouse.visible = true;
 
-		FlxG.switchState(new ShowHoardState());
+
+		if (Reg.score >= 200)
+		{
+			FlxG.switchState(new WinState());
+		}
+		else
+		{
+			FlxG.switchState(new ShowHoardState());
+		}
 	}
 }

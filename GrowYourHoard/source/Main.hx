@@ -63,8 +63,8 @@ class Main extends Sprite
 			gameWidth = Math.ceil(stageWidth / zoom);
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
-		
-		
+
+
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 		#if flash
 		FlxG.sound.playMusic(AssetPaths.carnivalrides__mp3, 1, true);
