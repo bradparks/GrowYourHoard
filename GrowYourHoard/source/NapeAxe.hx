@@ -21,7 +21,7 @@ class NapeAxe extends NapeProjectile
 	{
 		super.setupGraphics();
 		loadGraphic(AssetPaths.axe__png, false, 8, 8);
-		animation.add("main", [0,1,2,3], 10, true);
+		animation.add("main", [0, 1, 2, 3], 10, true);
 		animation.play("main");
 	}
 
@@ -39,6 +39,6 @@ class NapeAxe extends NapeProjectile
 
 	override public function getSpawnedSprite(x:Float, y:Float):FlxSprite
 	{
-		return new Axe(x,y);
+		return new Axe(x, y);
 	}
 }

@@ -53,20 +53,23 @@ class NapeProjectile extends FlxNapeSprite
 	{
 	}
 
-	public function getSpawnedSprite(x:Float,y:Float):FlxSprite
+	public function getSpawnedSprite(x:Float, y:Float):FlxSprite
 	{
 		return new FlxSprite(x, y);
 	}
 
-	public function stop(minX:Float, maxX:Float)
+	public function stop(minX:Float, maxX:Float, blocked:Bool)
 	{
 		var newX:Float = (x < minX ? minX : (x > maxX ? maxX : x));
 
 		spawnedArrow = getSpawnedSprite(newX, y);
-		deadProjectiles.add(spawnedArrow);
-		FlxG.state.add(deadProjectiles);
 
-		this.x = -1;
+		if (!blocked)
+		{
+			deadProjectiles.add(spawnedArrow);
+			FlxG.state.add(deadProjectiles);
+		}
+
 		kill();
 	}
 
@@ -76,7 +79,7 @@ class NapeProjectile extends FlxNapeSprite
 
 		if (this.y > 203)
 		{
-			this.stop(x, x);
+			this.stop(x, x, false);
 		}
 	}
 }

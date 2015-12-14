@@ -33,7 +33,7 @@ class NapeArrow extends NapeProjectile
 		Reg.counters["arrows_blocked"] += 1;
 	}
 
-	override public function getSpawnedSprite(x:Float,y:Float):FlxSprite
+	override public function getSpawnedSprite(x:Float, y:Float):FlxSprite
 	{
 		return new Arrow(x, y);
 	}

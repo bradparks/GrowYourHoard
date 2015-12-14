@@ -14,6 +14,8 @@ import nape.space.Space;
 import nape.geom.Vec2;
 import flixel.addons.nape.FlxNapeState;
 import flixel.util.FlxRandom;
+import openfl.geom.Point;
+import openfl.geom.Rectangle;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -121,9 +123,17 @@ class PlayState extends FlxNapeState
 
 	private function handlePlayerCollision(projectile:NapeProjectile, goblin:FlxSprite)
 	{
-		projectile.stop(goblin.x + 2, goblin.x + goblin.width - 8);
-		player.arrows.push(projectile.spawnedArrow);
+		projectile.stop(goblin.x + 2, goblin.x + goblin.width - 8, true);
+
+		var sourceRect:Rectangle = new Rectangle(0, 0, projectile.spawnedArrow.width, projectile.spawnedArrow.height);
+		var destPoint:Point = new Point(Std.int(projectile.spawnedArrow.x - player.projectilesInShield.x), player.projectilesInShield.height - projectile.spawnedArrow.height);
+
+		player.projectilesInShield.pixels.copyPixels(projectile.spawnedArrow.getFlxFrameBitmapData(), sourceRect, destPoint, null, null, true);
+		player.projectilesInShield.frame.destroyBitmapDatas();
+		player.projectilesInShield.dirty = true;
+
 		projectile.countUpBlocked();
+		projectile.spawnedArrow.kill();
 
 		// Keep the player group on top
 		remove(player, true);

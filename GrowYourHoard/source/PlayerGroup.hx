@@ -1,5 +1,6 @@
 package;
 
+import openfl.display.BitmapData;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -15,7 +16,10 @@ import haxe.Timer;
 class PlayerGroup extends FlxGroup
 {
 	public var goblin:FlxSprite;
-	public var arrows:Array<FlxSprite> = [];
+	public var projectilesInShield:FlxSprite;
+
+	private var shieldOffsetX:Int = 5;
+	private var shieldOffsetY:Int = 7;
 
 	private var doubleTapDuration:Float = 0.0;
 	private var doubleTapDirection:String = "";
@@ -37,6 +41,7 @@ class PlayerGroup extends FlxGroup
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super();
+
 		goblin = new FlxSprite(X, Y);
 		goblin.allowCollisions = FlxObject.CEILING;
 		goblin.immovable = true;
@@ -47,6 +52,8 @@ class PlayerGroup extends FlxGroup
 			goblin.loadGraphic("assets/images/shieldbigger.png", true, 12, 10);
 			goblin.setGraphicSize(30, 25);
 			goblin.updateHitbox();
+
+			shieldOffsetX = 13;
 		}
 		else
 		{
@@ -56,8 +63,11 @@ class PlayerGroup extends FlxGroup
 		}
 
 		goblin.animation.add("main", [0,1], 4, true);
-
 		add(goblin);
+
+		projectilesInShield = new FlxSprite();
+		projectilesInShield.pixels = new BitmapData(Std.int(goblin.width), 10, true, 0xFFFFFF);
+		add(projectilesInShield);
 	}
 
 	override public function update():Void
@@ -79,35 +89,26 @@ class PlayerGroup extends FlxGroup
 
 		if (processLeft)
 		{
+			projectilesInShield.flipX = true;
 			goblin.flipX = true;
 			deltaX += -2;
 		}
 
 		if (processRight)
 		{
+			projectilesInShield.flipX = false;
 			goblin.flipX = false;
 			deltaX += 2;
 		}
+
 		if (!dashing)
 		{
-			var flipArrows:Bool = (goblin.flipX != oldFlipX);
-			var i:Int;
-
 			if (deltaX != 0 && Math.abs(deltaX) < 3)
 			{
 				goblin.animation.play("main");
 				goblin.x += deltaX;
-
-				for (i in 0...arrows.length)
-				{
-					arrows[i].x += deltaX;
-					if (flipArrows)
-					{
-						arrows[i].flipX = !arrows[i].flipX;
-					}
-				}
 			}
-			else if ( Math.abs(deltaX) > 2)
+			else if (Math.abs(deltaX) > 2)
 			{
 				FlxTween.tween(goblin, { x: goblin.x + deltaX }, .2);
 				dashing = true;
@@ -122,20 +123,38 @@ class PlayerGroup extends FlxGroup
 				{
 					goblin.allowCollisions = FlxObject.RIGHT;
 				}
-
-				for (i in 0...arrows.length)
-				{
-					FlxTween.tween(arrows[i], { x: arrows[i].x + deltaX }, .2);
-					if (flipArrows)
-					{
-						arrows[i].flipX = !arrows[i].flipX;
-					}
-				}
 			}
 		}
 		else
 		{
 			goblin.animation.frameIndex = 2;
+		}
+
+		updateArrowsOnShield();
+	}
+
+	private function updateArrowsOnShield()
+	{
+		// Put arrows on top
+		if (!dashing)
+		{
+			resetShieldProjectiles();
+		}
+		else
+		{
+			// Put arrows on the side left side
+			if (goblin.flipX)
+			{
+				projectilesInShield.angle = 270;
+				projectilesInShield.x = goblin.x - projectilesInShield.width + shieldOffsetX;
+			}
+			else
+			{
+				projectilesInShield.angle = 90;
+				projectilesInShield.x = goblin.x + goblin.width - shieldOffsetX;
+			}
+
+			projectilesInShield.y = goblin.y + shieldOffsetY;
 		}
 	}
 
@@ -145,6 +164,15 @@ class PlayerGroup extends FlxGroup
 		dashtimer.stop();
 		dashtimer = null;
 		goblin.allowCollisions = FlxObject.CEILING;
+
+		resetShieldProjectiles();
+	}
+
+	private function resetShieldProjectiles()
+	{
+		projectilesInShield.angle = 0;
+		projectilesInShield.x = goblin.x;
+		projectilesInShield.y = goblin.y - projectilesInShield.height;
 	}
 
 	private function resetDoubleTap(direction:String = "")
