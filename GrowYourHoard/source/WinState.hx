@@ -64,8 +64,6 @@ class WinState extends FlxNapeState
 		if (FlxRandom.chanceRoll(3) && Reg.counters["goblins_launched"] > 0)
 		{
 			Reg.counters["goblins_launched"] -= 2;
-			trace(Reg.counters["goblins_launched"]);
-
 			add(new GoblinShow(270, 125));
 		}
 
