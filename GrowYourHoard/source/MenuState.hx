@@ -25,7 +25,7 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-
+		
 		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
 
 		goblin = new FlxSprite(130, 100);
@@ -53,7 +53,6 @@ class MenuState extends FlxState
 
 		helpBtn = new Button(100, 185, 120, 30, AssetPaths.button__png, "HELP", help);
 		add(helpBtn);
-
 		FlxG.autoPause = false;
 	}
 

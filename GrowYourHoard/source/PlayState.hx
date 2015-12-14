@@ -2,6 +2,7 @@ package;
 
 import flixel.addons.nape.FlxNapeSprite;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
@@ -31,6 +32,7 @@ class PlayState extends FlxNapeState
 	private var levelTimer:Timer;
 	private var player:PlayerGroup;
 	private var lastScore:Int;
+	private var soldier:Soldier;
 
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -88,6 +90,8 @@ class PlayState extends FlxNapeState
 		Reg.level += 1;
 		levelTimer = new Timer((30 + Reg.level) * 1000);
 		levelTimer.run = endLevel;
+		soldier = new Soldier( -96, 166);
+		add(soldier);
 	}
 
 	/**
@@ -115,12 +119,20 @@ class PlayState extends FlxNapeState
 		FlxG.collide(NapeProjectile.projectiles, player.goblin, handlePlayerCollision);
 		FlxG.collide(NapeProjectile.projectiles, Goblin.goblins, handleGoblinCollision);
 
+		FlxG.collide(soldier, Goblin.goblins, handleSoldierCollision);
+		
 		if (FlxG.keys.justPressed.G)
 		{
 			napeDebugEnabled = !napeDebugEnabled;
 		}
 	}
-
+	
+	private function handleSoldierCollision(soldier:FlxSprite, goblin:FlxSprite)
+	{
+		goblin.hurt(5);
+		FlxG.sound.play(AssetPaths.hit__wav);
+	}
+	
 	private function handlePlayerCollision(projectile:NapeProjectile, goblin:FlxSprite)
 	{
 		projectile.stop(goblin.x + 2, goblin.x + goblin.width - 8, true);
