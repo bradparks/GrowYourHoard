@@ -81,6 +81,7 @@ class PlayerGroup extends FlxGroup
 		{
 			goblin.animation.frameIndex = 0;
 			goblin.animation.pause();
+			updateArrowsOnShield();
 			return;
 		}
 
