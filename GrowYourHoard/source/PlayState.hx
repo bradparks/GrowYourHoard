@@ -200,6 +200,6 @@ class PlayState extends FlxNapeState
 
 		FlxG.mouse.visible = true;
 
-		FlxG.switchState(new HoardState());
+		FlxG.switchState(new ShowHoardState());
 	}
 }
