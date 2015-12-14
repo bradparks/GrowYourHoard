@@ -147,7 +147,7 @@ class PlayState extends FlxNapeState
 			FlxG.sound.play(AssetPaths.hit__wav);
 		}
 	}
-	
+
 	private function handlePlayerCollision(projectile:NapeProjectile, goblin:FlxSprite)
 	{
 		projectile.stop(goblin.x + 2, goblin.x + goblin.width - 8, true);
@@ -243,7 +243,7 @@ class PlayState extends FlxNapeState
 		FlxG.mouse.visible = true;
 
 
-		if (Reg.score >= 200)
+		if (Reg.score >= 100)
 		{
 			FlxG.switchState(new WinState());
 		}

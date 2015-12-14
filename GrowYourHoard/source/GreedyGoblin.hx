@@ -34,7 +34,7 @@ class GreedyGoblin extends Goblin
 
 		Reg.counters["greedy_goblins_launched"] += 1;
 
-		FlxVelocity.moveTowardsPoint(this, new FlxPoint(0 - width, y), 30);
+		FlxVelocity.moveTowardsPoint(this, new FlxPoint(0 - width, y), 45);
 	}
 
 	override private function getScore()
