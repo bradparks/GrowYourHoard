@@ -17,6 +17,8 @@ class Coin extends FlxNapeSprite
 		loadGraphic(AssetPaths.coin__png, true, 8, 8);
 		animation.add("main", [4, 5, 6, 7], 10, true);
 		animation.play("main");
+		setGraphicSize(16, 16);
+		updateHitbox();
 		solid = true;
 		antialiasing = true;
 		createRectangularBody();

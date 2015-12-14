@@ -55,6 +55,11 @@ class Goblin extends FlxSprite
 	{
 		super.kill();
 		Reg.upgrades[getUnitTag()]["number"] -= 1;
+		
+		if (this.x >= 0 - width)
+		{
+			Reg.counters[getUnitTag() + "s_harmed"] += 1;
+		}
 	}
 
 	private function getScore()

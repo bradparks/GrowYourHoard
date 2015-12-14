@@ -17,6 +17,7 @@ class PlayerGroup extends FlxGroup
 {
 	public var goblin:FlxSprite;
 	public var projectilesInShield:FlxSprite;
+	public var damage = 1;
 
 	private var shieldOffsetX:Int = 5;
 	private var shieldOffsetY:Int = 7;
@@ -53,6 +54,7 @@ class PlayerGroup extends FlxGroup
 			goblin.loadGraphic("assets/images/shieldbigger.png", true, 12, 10);
 			goblin.setGraphicSize(30, 25);
 			goblin.updateHitbox();
+			damage = 2;
 
 			shieldOffsetX = 13;
 		}

@@ -27,8 +27,6 @@ class MenuState extends FlxState
 	{
 		super.create();
 
-		Reg.reset();
-
 		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
 
 		goblin = new FlxSprite(40, 100);
@@ -84,6 +82,7 @@ class MenuState extends FlxState
 
 	public function play(sprite:FlxSprite = null)
 	{
+		Reg.reset();
 		FlxG.switchState(new PlayState());
 	}
 

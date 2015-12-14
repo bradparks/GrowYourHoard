@@ -4,7 +4,7 @@ package;
  * ...
  * @author John Doughty
  */
-class GoblinShow extends Goblin
+class GreedyGoblinShow extends GreedyGoblin
 {
 	override function getScore()
 	{

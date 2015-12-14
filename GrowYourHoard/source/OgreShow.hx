@@ -4,7 +4,7 @@ package;
  * ...
  * @author John Doughty
  */
-class GoblinShow extends Goblin
+class OgreShow extends Ogre
 {
 	override function getScore()
 	{
@@ -13,6 +13,6 @@ class GoblinShow extends Goblin
 
 	override function getTargetY()
 	{
-		return 140;
+		return 112;
 	}
 }

@@ -17,6 +17,9 @@ class HoardState extends FlxState
 	private var subHead:FlxText;
 	private var head:FlxText;
 	private var scoreText:FlxText;
+	private var greedCountText:FlxText;
+	private var ogreCountText:FlxText;
+	private var shieldCountText:FlxText;
 	private var menuButtons:FlxGroup;
 
 	private static var buttons = [
@@ -79,7 +82,8 @@ class HoardState extends FlxState
 		head.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		head.scale.set(2, 2);
 		add(head);
-
+		
+		createUnitCounts();
 		createButtons();
 	}
 
@@ -98,7 +102,7 @@ class HoardState extends FlxState
 	override public function update():Void
 	{
 		super.update();
-		scoreText.text = Reg.score+"";
+		updateUnitCounts();
 	}
 
 	private function buy(itemOrUnitName:String)
@@ -160,5 +164,37 @@ class HoardState extends FlxState
 		}
 
 		add(menuButtons);
+	}
+	
+	private function updateUnitCounts()
+	{
+		ogreCountText.text = Reg.upgrades["ogre"]["number"]+"";
+		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"]+"";
+		shieldCountText.text = Reg.upgrades["large_shield"]["number"]+"";
+		scoreText.text = Reg.score+"";
+	}
+	
+	private function createUnitCounts()
+	{
+		add(new FlxSprite(0, 0,AssetPaths.shieldui__png));
+		shieldCountText = new FlxText(16, 0, 32);
+		shieldCountText.text = Reg.upgrades["large_shield"]["number"]+"";
+		shieldCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
+		shieldCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
+		add(shieldCountText);
+		
+		add(new GreedyGoblinUI(0, 18));
+		greedCountText = new FlxText(16, 18, 32);
+		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"]+"";
+		greedCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
+		greedCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
+		add(greedCountText);
+		
+		add(new OgreUI(4, 36));
+		ogreCountText = new FlxText(16, 36, 32);
+		ogreCountText.text = Reg.upgrades["ogre"]["number"]+"";
+		ogreCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
+		ogreCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
+		add(ogreCountText);
 	}
 }

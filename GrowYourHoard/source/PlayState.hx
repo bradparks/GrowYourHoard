@@ -26,6 +26,9 @@ class PlayState extends FlxNapeState
 	private var background:FlxSprite;
 	private var castle:FlxSprite;
 	private var scoreText:FlxText;
+	private var greedCountText:FlxText;
+	private var ogreCountText:FlxText;
+	private var shieldCountText:FlxText;
 	private var spawnTimer:Timer;
 	private var soldierTimer:Timer;
 	private var shootTimer:Timer;
@@ -53,7 +56,7 @@ class PlayState extends FlxNapeState
 		background.moves = false;
 		background.solid = false;
 		add(background);
-
+		
 		castle = new FlxSprite(250, 57, AssetPaths.castle__png);
 		castle.moves = false;
 		castle.solid = false;
@@ -62,6 +65,8 @@ class PlayState extends FlxNapeState
 		player = new PlayerGroup(60, 186);
 		add(player);
 
+		createUnitCounts();
+		
 		scoreText = new FlxText(0, 0, 320);
 		scoreText.text = Reg.score+"";
 		scoreText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");
@@ -130,6 +135,7 @@ class PlayState extends FlxNapeState
 		{
 			napeDebugEnabled = !napeDebugEnabled;
 		}
+		updateUnitCounts();
 	}
 
 	private function handleSoldierCollision(soldier:FlxSprite, goblin:FlxSprite)
@@ -142,7 +148,7 @@ class PlayState extends FlxNapeState
 	{
 		if (player.dashing && !player.hasHit)
 		{
-			soldier.hurt(1);
+			soldier.hurt(player.damage);
 			player.hasHit = true;
 			FlxG.sound.play(AssetPaths.hit__wav);
 		}
@@ -251,5 +257,36 @@ class PlayState extends FlxNapeState
 		{
 			FlxG.switchState(new ShowHoardState());
 		}
+	}
+	
+	
+	private function updateUnitCounts()
+	{
+		ogreCountText.text = Reg.upgrades["ogre"]["number"]+"";
+		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"]+"";
+	}
+	
+	private function createUnitCounts()
+	{
+		add(new FlxSprite(0, 0,AssetPaths.shieldui__png));
+		shieldCountText = new FlxText(16, 0, 32);
+		shieldCountText.text = Reg.upgrades["large_shield"]["number"]+"";
+		shieldCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
+		shieldCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
+		add(shieldCountText);
+		
+		add(new GreedyGoblinUI(0, 18));
+		greedCountText = new FlxText(16, 18, 32);
+		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"]+"";
+		greedCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
+		greedCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
+		add(greedCountText);
+		
+		add(new OgreUI(4, 36));
+		ogreCountText = new FlxText(16, 36, 32);
+		ogreCountText.text = Reg.upgrades["ogre"]["number"]+"";
+		ogreCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
+		ogreCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
+		add(ogreCountText);
 	}
 }
