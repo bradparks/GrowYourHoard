@@ -6,13 +6,12 @@ package;
  */
 class GoblinShow extends Goblin
 {
-
-	override function getScore() 
+	override function getScore()
 	{
 		return 0;
 	}
-	
-	override function getTargetY() 
+
+	override function getTargetY()
 	{
 		return 125;
 	}
