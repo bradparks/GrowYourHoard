@@ -18,6 +18,7 @@ class MenuState extends FlxState
 	var playBtn:Button;
 	var helpBtn:Button;
 	var goblin:FlxSprite;
+	var goblin2:FlxSprite;
 
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -30,12 +31,18 @@ class MenuState extends FlxState
 
 		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
 
-		goblin = new FlxSprite(130, 100);
+		goblin = new FlxSprite(40, 100);
 		goblin.loadGraphic(AssetPaths.shieldwithgold__png, true, 8, 16);
-		goblin.setGraphicSize(30, 60);
+		goblin.setGraphicSize(60, 120);
 		goblin.animation.add("main", [0, 1], 5, true);
 		goblin.animation.play("main");
 		add(goblin);
+		goblin2 = new FlxSprite(275, 100);
+		goblin2.loadGraphic(AssetPaths.shieldwithgold__png, true, 8, 16);
+		goblin2.setGraphicSize(60, 120);
+		goblin2.animation.add("main", [0, 1], 5, true);
+		goblin2.animation.play("main");
+		add(goblin2);
 
 		subHead = new FlxText(0, 0, 320);
 		subHead.text = "GROW YOUR";
