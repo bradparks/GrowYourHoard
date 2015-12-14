@@ -25,7 +25,6 @@ class PlayState extends FlxNapeState
 {
 	private var background:FlxSprite;
 	private var castle:FlxSprite;
-	private var fire:FlxSprite;
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
 	private var soldierTimer:Timer;
@@ -54,12 +53,6 @@ class PlayState extends FlxNapeState
 		background.moves = false;
 		background.solid = false;
 		add(background);
-
-		fire = new FlxSprite(255, 30);
-		fire.loadGraphic(AssetPaths.fire__png, true, 68, 80);
-		fire.animation.add("main", [0, 1, 2], 10);
-		fire.animation.play("main");
-		add(fire);
 
 		castle = new FlxSprite(250, 57, AssetPaths.castle__png);
 		castle.moves = false;
@@ -93,7 +86,7 @@ class PlayState extends FlxNapeState
 		levelTimer.run = endLevel;
 		if (Reg.level > 3)
 		{
-			soldierTimer = new Timer(Math.round(Math.random()* 1500));
+			soldierTimer = new Timer(Math.round(Math.random() * 15000 + 5000));
 			soldierTimer.run = spawnSoldier;
 		}
 	}
