@@ -25,7 +25,8 @@ class PlayerGroup extends FlxGroup
 	private var doubleTapDirection:String = "";
 
 	private var dashtimer:Timer;
-	private var dashing:Bool;
+	public var dashing:Bool;
+	public var hasHit:Bool = false;
 
 	private var keyboardInputs = [
 		"left" => [
@@ -77,6 +78,16 @@ class PlayerGroup extends FlxGroup
 		var processLeft:Bool = hasLeftInput();
 		var processRight:Bool = hasRightInput();
 
+		if (goblin.x > 250 - goblin.width + 8)
+		{
+			goblin.x = 250 - goblin.width + 8;
+		}
+		
+		if (goblin.x < -goblin.width)
+		{
+			goblin.x = -goblin.width;
+		}
+		
 		if (!processLeft && !processRight)
 		{
 			goblin.animation.frameIndex = 0;
@@ -162,6 +173,7 @@ class PlayerGroup extends FlxGroup
 	private function clearDashing()
 	{
 		dashing = false;
+		hasHit = false;
 		dashtimer.stop();
 		dashtimer = null;
 		goblin.allowCollisions = FlxObject.CEILING;

@@ -28,6 +28,7 @@ class PlayState extends FlxNapeState
 	private var fire:FlxSprite;
 	private var scoreText:FlxText;
 	private var spawnTimer:Timer;
+	private var soldierTimer:Timer;
 	private var shootTimer:Timer;
 	private var levelTimer:Timer;
 	private var player:PlayerGroup;
@@ -90,8 +91,11 @@ class PlayState extends FlxNapeState
 		Reg.level += 1;
 		levelTimer = new Timer((30 + Reg.level) * 1000);
 		levelTimer.run = endLevel;
-		soldier = new Soldier( -96, 166);
-		add(soldier);
+		if (Reg.level > 3)
+		{
+			soldierTimer = new Timer(Math.round(Math.random()* 1500));
+			soldierTimer.run = spawnSoldier;
+		}
 	}
 
 	/**
@@ -119,8 +123,16 @@ class PlayState extends FlxNapeState
 		FlxG.collide(NapeProjectile.projectiles, player.goblin, handlePlayerCollision);
 		FlxG.collide(NapeProjectile.projectiles, Goblin.goblins, handleGoblinCollision);
 
-		FlxG.collide(soldier, Goblin.goblins, handleSoldierCollision);
-		
+		if (soldier != null)
+		{
+			if (soldier.x > 250 - soldier.width)
+			{
+				endLevel();
+				return;
+			}
+			FlxG.overlap(soldier, Goblin.goblins, handleSoldierCollision);
+			FlxG.overlap(soldier.hitBox, player.goblin, hitSoldier);
+		}
 		if (FlxG.keys.justPressed.G)
 		{
 			napeDebugEnabled = !napeDebugEnabled;
@@ -131,6 +143,16 @@ class PlayState extends FlxNapeState
 	{
 		goblin.hurt(5);
 		FlxG.sound.play(AssetPaths.hit__wav);
+	}
+	
+	private function hitSoldier(soldierHitBox:FlxSprite, goblin:FlxSprite)
+	{
+		if (player.dashing && !player.hasHit)
+		{
+			soldier.hurt(1);
+			player.hasHit = true;
+			FlxG.sound.play(AssetPaths.hit__wav);
+		}
 	}
 	
 	private function handlePlayerCollision(projectile:NapeProjectile, goblin:FlxSprite)
@@ -186,6 +208,14 @@ class PlayState extends FlxNapeState
 		}
 
 		add(Goblin.goblins);
+	}
+
+	private function spawnSoldier()
+	{
+		soldierTimer.stop();
+		soldierTimer = null;
+		soldier = new Soldier( -58, 166);
+		add(soldier);
 	}
 
 	private function shoot()
