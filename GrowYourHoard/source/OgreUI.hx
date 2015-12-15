@@ -14,7 +14,7 @@ class OgreUI extends Ogre
 
 	override private function setup()
 	{
-		loadGraphic("assets/images/ogre.png", true, 8, 16);
+		loadGraphic("assets/images/ogre.png", true, 32, 64);
 		setGraphicSize(8, 16);
 		updateHitbox();
 	}

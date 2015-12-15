@@ -195,7 +195,7 @@ class PlayState extends FlxNapeState
 
 		if (Reg.upgrades["greedy_goblin"]["number"] > 0 && Math.random() > 0.8)
 		{
-			Goblin.goblins.add(new GreedyGoblin(260, 197));
+			Goblin.goblins.add(new GreedyGoblin(260, 185));
 		}
 		else if (Reg.upgrades["ogre"]["number"] > 0 && Math.random() > 0.8)
 		{
@@ -203,7 +203,7 @@ class PlayState extends FlxNapeState
 		}
 		else
 		{
-			Goblin.goblins.add(new Goblin(260, 197));
+			Goblin.goblins.add(new Goblin(260, 190));
 		}
 
 		add(Goblin.goblins);
@@ -262,8 +262,16 @@ class PlayState extends FlxNapeState
 	
 	private function updateUnitCounts()
 	{
+		if (Reg.upgrades["greedy_goblin"]["number"] < 0)
+		{
+			Reg.upgrades["greedy_goblin"]["number"] = 0;
+		}
+		if (Reg.upgrades["ogre"]["number"] < 0)
+		{
+			Reg.upgrades["ogre"]["number"] = 0;
+		}
 		ogreCountText.text = Reg.upgrades["ogre"]["number"]+"";
-		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"]+"";
+		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"] + "";
 	}
 	
 	private function createUnitCounts()

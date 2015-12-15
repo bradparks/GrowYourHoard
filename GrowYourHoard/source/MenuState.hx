@@ -17,6 +17,7 @@ class MenuState extends FlxState
 	var head:FlxText;
 	var playBtn:Button;
 	var helpBtn:Button;
+	var creditsBtn:Button;
 	var goblin:FlxSprite;
 	var goblin2:FlxSprite;
 
@@ -29,15 +30,13 @@ class MenuState extends FlxState
 
 		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
 
-		goblin = new FlxSprite(40, 100);
-		goblin.loadGraphic(AssetPaths.shieldwithgold__png, true, 8, 16);
-		goblin.setGraphicSize(60, 120);
+		goblin = new FlxSprite(20, 60);
+		goblin.loadGraphic(AssetPaths.shieldwithgold__png, true, 60, 120);
 		goblin.animation.add("main", [0, 1], 5, true);
 		goblin.animation.play("main");
 		add(goblin);
-		goblin2 = new FlxSprite(275, 100);
-		goblin2.loadGraphic(AssetPaths.shieldwithgold__png, true, 8, 16);
-		goblin2.setGraphicSize(60, 120);
+		goblin2 = new FlxSprite(245, 60);
+		goblin2.loadGraphic(AssetPaths.shieldwithgold__png, true, 60, 120);
 		goblin2.animation.add("main", [0, 1], 5, true);
 		goblin2.animation.play("main");
 		add(goblin2);
@@ -55,11 +54,14 @@ class MenuState extends FlxState
 		head.scale.set(2, 2);
 		add(head);
 
-		playBtn = new Button(100, 150, 120, 30, AssetPaths.button__png, "PLAY", play);
+		playBtn = new Button(100, 100, 120, 30, AssetPaths.button__png, "PLAY", play, 18);
 		add(playBtn);
 
-		helpBtn = new Button(100, 185, 120, 30, AssetPaths.button__png, "HELP", help);
+		helpBtn = new Button(100, 135, 120, 30, AssetPaths.button__png, "HELP", help, 18);
 		add(helpBtn);
+		
+		creditsBtn = new Button(100, 170, 120, 30, AssetPaths.button__png, "Credits", credits, 18);
+		add(creditsBtn);
 		FlxG.autoPause = false;
 	}
 
@@ -89,5 +91,10 @@ class MenuState extends FlxState
 	public function help(sprite:FlxSprite = null)
 	{
 		FlxG.switchState(new HelpState());
+	}
+
+	public function credits(sprite:FlxSprite = null)
+	{
+		FlxG.switchState(new CreditsState());
 	}
 }

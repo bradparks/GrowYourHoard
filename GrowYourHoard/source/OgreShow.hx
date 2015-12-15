@@ -13,6 +13,6 @@ class OgreShow extends Ogre
 
 	override function getTargetY()
 	{
-		return 112;
+		return 84;
 	}
 }

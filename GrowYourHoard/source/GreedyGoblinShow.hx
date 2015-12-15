@@ -13,6 +13,6 @@ class GreedyGoblinShow extends GreedyGoblin
 
 	override function getTargetY()
 	{
-		return 140;
+		return 135;
 	}
 }

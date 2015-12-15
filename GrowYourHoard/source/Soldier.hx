@@ -18,10 +18,8 @@ class Soldier extends FlxSprite
 	public function new(X:Float=0, Y:Float=0) 
 	{
 		super(X, Y);
-		loadGraphic(AssetPaths.soldier__png, true, 26, 20);
-		setGraphicSize(58, 45);
-		updateHitbox();
-		animation.add("main", [0, 1, 2, 3, 4, 3, 2, 1], 4,true);
+		loadGraphic(AssetPaths.soldier__png, true, 58, 45);
+		animation.add("main", [0, 1, 2, 3, 4, 3, 2, 1], 6,true);
 		animation.play("main");
 		hitBox = new FlxSprite(X, Y);
 		hitBox.loadGraphic(AssetPaths.background__png, false, 27, 45);

@@ -30,8 +30,8 @@ class HelpState extends FlxState
 		head.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		head.scale.set(2, 2);
 		text = new FlxText(0, 60, 300);
-		text.text = "Press D or A to go Left and Right and shield your loyal minions from arrow fire";
-		text.setFormat(AssetPaths.Our_Arcade_Games__ttf, 13, FlxColor.GOLDEN, "center");
+		text.text = "Press A Left or Clickto go Left and Press D Right\n\n or Right Click to go Right and shield your\n\n loyal minions from arrow fire\n\nDouble Tap to perform a dash attack that\n\n fends off soldiers";
+		text.setFormat(AssetPaths.Our_Arcade_Games__ttf, 8, FlxColor.GOLDEN, "center");
 
 		text.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		playBtn = new Button(100, 150, 120, 30, AssetPaths.button__png, "PLAY",play);
@@ -63,6 +63,7 @@ class HelpState extends FlxState
 
 	public function play(sprite:FlxSprite = null)
 	{
+		Reg.reset();
 		FlxG.switchState(new PlayState());
 	}
 

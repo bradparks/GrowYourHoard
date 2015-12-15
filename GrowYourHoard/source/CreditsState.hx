@@ -40,14 +40,14 @@ class CreditsState extends FlxState
 		add(head);
 
 		john = new FlxText(0, 80, 320);
-		john.text = "John Doughty - Code & Art";
+		john.text = "John Doughty Code and Art";
 		john.setFormat(AssetPaths.Our_Arcade_Games__ttf, 8, FlxColor.GOLDEN, "center");
 		john.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		john.scale.set(2, 2);
 		add(john);
 
 		nick = new FlxText(0, 55, 320);
-		nick.text = "Nicholas Cash - Code";
+		nick.text = "Nicholas Cash Code";
 		nick.setFormat(AssetPaths.Our_Arcade_Games__ttf, 8, FlxColor.GOLDEN, "center");
 		nick.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		nick.scale.set(2, 2);
@@ -55,7 +55,7 @@ class CreditsState extends FlxState
 		if (Reg.counters["goblins_harmed"] + Reg.counters["greedy_goblins_harmed"] +Reg.counters["ogres_harmed"] > 0)
 		{
 			goblins = new FlxText(-3, 108, 320);
-			goblins.text = Reg.counters["goblins_harmed"] + " Goblins, " + Reg.counters["greedy_goblins_harmed"] + " Greedy Goblins,";
+			goblins.text = Reg.counters["goblins_harmed"] + " Goblins " + Reg.counters["greedy_goblins_harmed"] + " Greedy Goblins";
 			goblins.setFormat(AssetPaths.Our_Arcade_Games__ttf, 8, FlxColor.GOLDEN, "center");
 			goblins.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 			goblins.scale.set(2, 2);

@@ -12,8 +12,8 @@ class Ogre extends Goblin
 
 	override private function setup()
 	{
-		loadGraphic("assets/images/ogre.png", true, 8, 16);
-		animation.add("main", [0, 1], 4, true);
+		loadGraphic("assets/images/ogre.png", true, 32, 64);
+		animation.add("main", [0, 1], 6, true);
 		setGraphicSize(32, 64);
 		flipX = true;
 		animation.play("main");
@@ -25,7 +25,7 @@ class Ogre extends Goblin
 
 	override private function getTargetY()
 	{
-		return 170;
+		return 147;
 	}
 
 	override private function getUnitTag()

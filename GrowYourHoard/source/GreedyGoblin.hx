@@ -24,12 +24,13 @@ class GreedyGoblin extends Goblin
 
 	override private function setup()
 	{
-		loadGraphic("assets/images/goblinbigbag.png", true, 8, 8);
+		loadGraphic("assets/images/goblinbigbag.png", true, 20, 20);
 		setGraphicSize(20, 20);
+		updateHitbox();
 		flipX = true;
 
-		animation.add("walking", [0, 1], 4, true);
-		animation.add("stopped", [2, 3], 4, true);
+		animation.add("walking", [0, 1, 2], 12, true);
+		animation.add("stopped", [3, 4, 5], 12, true);
 		animation.play("walking");
 
 		Reg.counters["greedy_goblins_launched"] += 1;

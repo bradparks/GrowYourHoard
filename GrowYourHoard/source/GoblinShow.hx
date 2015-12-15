@@ -13,6 +13,6 @@ class GoblinShow extends Goblin
 
 	override function getTargetY()
 	{
-		return 140;
+		return 135;
 	}
 }

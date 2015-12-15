@@ -26,9 +26,9 @@ class Goblin extends FlxSprite
 
 	private function setup()
 	{
-		loadGraphic(AssetPaths.goblin1__png, true, 8, 8);
-		animation.add("main", [0, 1], 4, true);
-		setGraphicSize(20, 20);
+		loadGraphic(AssetPaths.goblin1__png, true, 20, 20);
+		updateHitbox();
+		animation.add("main", [0, 1, 2, 1], 12, true);
 		flipX = true;
 		animation.play("main");
 
@@ -69,7 +69,7 @@ class Goblin extends FlxSprite
 
 	private function getTargetY()
 	{
-		return 197;
+		return 190;
 	}
 
 	private function getUnitTag()

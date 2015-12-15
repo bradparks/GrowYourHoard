@@ -51,21 +51,17 @@ class PlayerGroup extends FlxGroup
 		if (Reg.upgrades["large_shield"]["number"] > 0)
 		{
 			Reg.upgrades["large_shield"]["number"] -= 1;
-			goblin.loadGraphic("assets/images/shieldbigger.png", true, 12, 10);
-			goblin.setGraphicSize(30, 25);
-			goblin.updateHitbox();
+			goblin.loadGraphic("assets/images/shieldbigger.png", true, 30, 25);
 			damage = 2;
 
 			shieldOffsetX = 13;
 		}
 		else
 		{
-			goblin.loadGraphic("assets/images/shield.png", true, 8, 10);
-			goblin.setGraphicSize(20, 25);
-			goblin.updateHitbox();
+			goblin.loadGraphic("assets/images/shield.png", true, 20, 25);
 		}
 
-		goblin.animation.add("main", [0,1], 4, true);
+		goblin.animation.add("main", [0,1,2,1], 12, true);
 		add(goblin);
 
 		projectilesInShield = new FlxSprite();
@@ -141,7 +137,7 @@ class PlayerGroup extends FlxGroup
 		}
 		else
 		{
-			goblin.animation.frameIndex = 2;
+			goblin.animation.frameIndex = 3;
 		}
 
 		updateArrowsOnShield();

@@ -8,6 +8,7 @@ import flash.Lib;
 import flixel.FlxGame;
 import flixel.FlxState;
 import flixel.FlxG;
+import haxe.Timer;
 
 class Main extends Sprite
 {
@@ -18,7 +19,7 @@ class Main extends Sprite
 	var framerate:Int = 60; // How many frames per second the game should run at.
 	var skipSplash:Bool = false; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
-
+	var timer:Timer;
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -66,10 +67,18 @@ class Main extends Sprite
 
 		Reg.reset();
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
-		#if flash
-		FlxG.sound.playMusic(AssetPaths.carnivalrides__mp3, 1, true);
-		#else
-		FlxG.sound.playMusic(AssetPaths.carnivalrides__ogg, 1, true);
-		#end
+		timer = new Timer(3500);
+		timer.run = playMusic;
+		
+		}
+		
+		private function playMusic()
+		{
+			timer.stop();
+			#if flash
+			FlxG.sound.playMusic(AssetPaths.carnivalrides__mp3, 1, true);
+			#else
+			FlxG.sound.playMusic(AssetPaths.carnivalrides__ogg, 1, true);
+			#end
 		}
 }
