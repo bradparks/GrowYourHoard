@@ -1,10 +1,11 @@
-package;
+package actors;
+import actors.Ogre;
 
 /**
  * ...
  * @author John Doughty
  */
-class OgreUI extends Ogre
+class OgreUI extends actors.Ogre
 {
 
 	override public function update():Void 

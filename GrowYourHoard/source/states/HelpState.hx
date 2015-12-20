@@ -1,4 +1,4 @@
-package;
+package states;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import flixel.plugin.MouseEventManager;
+import util.Button;
 
 /**
  * A FlxState which can be used for the game's menu.
@@ -15,8 +16,8 @@ class HelpState extends FlxState
 {
 	var text:FlxText;
 	var head:FlxText;
-	var playBtn:Button;
-	var menuBtn:Button;
+	var playBtn:util.Button;
+	var menuBtn:util.Button;
 
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -34,8 +35,8 @@ class HelpState extends FlxState
 		text.setFormat(AssetPaths.Our_Arcade_Games__ttf, 8, FlxColor.GOLDEN, "center");
 
 		text.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
-		playBtn = new Button(100, 150, 120, 30, AssetPaths.button__png, "PLAY",play);
-		menuBtn = new Button(100, 185, 120, 30, AssetPaths.button__png, "MENU",menu);
+		playBtn = new util.Button(100, 150, 120, 30, AssetPaths.button__png, "PLAY",play);
+		menuBtn = new util.Button(100, 185, 120, 30, AssetPaths.button__png, "MENU",menu);
 
 		add(new FlxSprite(0, 0, AssetPaths.menubackground__png));
 		add(text);
@@ -64,7 +65,7 @@ class HelpState extends FlxState
 	public function play(sprite:FlxSprite = null)
 	{
 		Reg.reset();
-		FlxG.switchState(new PlayState());
+		FlxG.switchState(new states.PlayState());
 	}
 
 	public function menu(sprite:FlxSprite = null)

@@ -5,7 +5,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.group.FlxGroup;
-import Arrow;
+import projectiles.Arrow;
 import flixel.tweens.FlxTween;
 import haxe.Timer;
 

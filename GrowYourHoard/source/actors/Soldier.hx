@@ -1,4 +1,4 @@
-package;
+package actors;
 
 import flixel.FlxBasic;
 import flixel.FlxObject;

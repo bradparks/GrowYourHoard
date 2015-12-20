@@ -1,11 +1,12 @@
-package;
+package actors;
 
 import flixel.util.FlxPoint;
 import flixel.util.FlxVelocity;
+import actors.Goblin;
 
-class Ogre extends Goblin
+class Ogre extends actors.Goblin
 {
-	public function new(X:Float=0, Y:Float=0, unitHealth:Float=3.0, ?SimpleGraphic:Dynamic)
+	public function new(X:Float=0, Y:Float=0, unitHealth:Float=5.0, ?SimpleGraphic:Dynamic)
 	{
 		super(X, Y, unitHealth, SimpleGraphic);
 	}

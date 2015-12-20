@@ -1,10 +1,11 @@
-package;
+package actors;
 
 import flixel.util.FlxRandom;
 import flixel.util.FlxPoint;
 import flixel.util.FlxVelocity;
+import actors.Goblin;
 
-class GreedyGoblin extends Goblin
+class GreedyGoblin extends actors.Goblin
 {
 	public function new(X:Float=0, Y:Float=0, unitHealth:Float=1.0, ?SimpleGraphic:Dynamic)
 	{

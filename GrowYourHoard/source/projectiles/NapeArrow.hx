@@ -1,4 +1,4 @@
-package;
+package projectiles;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
 
@@ -35,6 +35,6 @@ class NapeArrow extends NapeProjectile
 
 	override public function getSpawnedSprite(x:Float, y:Float):FlxSprite
 	{
-		return new Arrow(x, y);
+		return new projectiles.Arrow(x, y);
 	}
 }

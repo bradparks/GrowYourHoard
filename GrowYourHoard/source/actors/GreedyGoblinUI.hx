@@ -1,10 +1,11 @@
-package;
+package actors;
+import actors.GreedyGoblin;
 
 /**
  * ...
  * @author John Doughty
  */
-class GreedyGoblinUI extends GreedyGoblin
+class GreedyGoblinUI extends actors.GreedyGoblin
 {
 
 	override public function update():Void

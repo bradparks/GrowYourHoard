@@ -1,5 +1,6 @@
-package;
+package states;
 
+import actors.Soldier;
 import flixel.addons.nape.FlxNapeSprite;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -17,6 +18,14 @@ import flixel.addons.nape.FlxNapeState;
 import flixel.util.FlxRandom;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
+import projectiles.NapeArrow;
+import projectiles.NapeAxe;
+import projectiles.NapeProjectile;
+import actors.Goblin;
+import actors.GreedyGoblin;
+import actors.GreedyGoblinUI;
+import actors.Ogre;
+import actors.OgreUI;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -35,7 +44,7 @@ class PlayState extends FlxNapeState
 	private var levelTimer:Timer;
 	private var player:PlayerGroup;
 	private var lastScore:Int;
-	private var soldier:Soldier;
+	private var soldier:actors.Soldier;
 
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -44,11 +53,11 @@ class PlayState extends FlxNapeState
 	{
 		super.create();
 
-		Goblin.goblins = new FlxGroup();
-		NapeProjectile.projectiles = new FlxGroup();
-		NapeProjectile.deadProjectiles = new FlxGroup();
-		NapeArrow.arrows = new FlxGroup();
-		NapeAxe.axes = new FlxGroup();
+		actors.Goblin.goblins = new FlxGroup();
+		projectiles.NapeProjectile.projectiles = new FlxGroup();
+		projectiles.NapeProjectile.deadProjectiles = new FlxGroup();
+		projectiles.NapeArrow.arrows = new FlxGroup();
+		projectiles.NapeAxe.axes = new FlxGroup();
 
 		FlxG.mouse.visible = false;
 
@@ -118,8 +127,8 @@ class PlayState extends FlxNapeState
 			FlxG.sound.play(AssetPaths.coin__wav);
 		}
 
-		FlxG.collide(NapeProjectile.projectiles, player.goblin, handlePlayerCollision);
-		FlxG.collide(NapeProjectile.projectiles, Goblin.goblins, handleGoblinCollision);
+		FlxG.collide(projectiles.NapeProjectile.projectiles, player.goblin, handlePlayerCollision);
+		FlxG.collide(projectiles.NapeProjectile.projectiles, actors.Goblin.goblins, handleGoblinCollision);
 
 		if (soldier != null)
 		{
@@ -128,7 +137,7 @@ class PlayState extends FlxNapeState
 				endLevel();
 				return;
 			}
-			FlxG.overlap(soldier, Goblin.goblins, handleSoldierCollision);
+			FlxG.overlap(soldier, actors.Goblin.goblins, handleSoldierCollision);
 			FlxG.overlap(soldier.hitBox, player.goblin, hitSoldier);
 		}
 		if (FlxG.keys.justPressed.G)
@@ -154,7 +163,7 @@ class PlayState extends FlxNapeState
 		}
 	}
 
-	private function handlePlayerCollision(projectile:NapeProjectile, goblin:FlxSprite)
+	private function handlePlayerCollision(projectile:projectiles.NapeProjectile, goblin:FlxSprite)
 	{
 		projectile.stop(goblin.x + 2, goblin.x + goblin.width - 8, true);
 
@@ -180,7 +189,7 @@ class PlayState extends FlxNapeState
 		add(player);
 	}
 
-	private function handleGoblinCollision(projectile:NapeProjectile, goblin:Goblin)
+	private function handleGoblinCollision(projectile:projectiles.NapeProjectile, goblin:actors.Goblin)
 	{
 		goblin.hurt(projectile.damage);
 		projectile.destroy();
@@ -195,25 +204,25 @@ class PlayState extends FlxNapeState
 
 		if (Reg.upgrades["greedy_goblin"]["number"] > 0 && Math.random() > 0.8)
 		{
-			Goblin.goblins.add(new GreedyGoblin(260, 185));
+			actors.Goblin.goblins.add(new actors.GreedyGoblin(260, 185));
 		}
 		else if (Reg.upgrades["ogre"]["number"] > 0 && Math.random() > 0.8)
 		{
-			Goblin.goblins.add(new Ogre(260, 170));
+			actors.Goblin.goblins.add(new actors.Ogre(260, 170));
 		}
 		else
 		{
-			Goblin.goblins.add(new Goblin(260, 190));
+			actors.Goblin.goblins.add(new actors.Goblin(260, 190));
 		}
 
-		add(Goblin.goblins);
+		add(actors.Goblin.goblins);
 	}
 
 	private function spawnSoldier()
 	{
 		soldierTimer.stop();
 		soldierTimer = null;
-		soldier = new Soldier( -58, 166);
+		soldier = new actors.Soldier( -58, 166);
 		add(soldier);
 	}
 
@@ -224,23 +233,23 @@ class PlayState extends FlxNapeState
 		shootTimer.run = shoot;
 		if (Math.random() > .1 + Reg.level/30)
 		{
-			NapeArrow.arrows.add(new NapeArrow(250, 70));
-			add(NapeArrow.arrows);
+			projectiles.NapeArrow.arrows.add(new projectiles.NapeArrow(250, 70));
+			add(projectiles.NapeArrow.arrows);
 			FlxG.sound.play(AssetPaths.arrowshoot__wav);
 		}
 		else
 		{
-			NapeAxe.axes.add(new NapeAxe(250, 70));
-			add(NapeAxe.axes);
+			projectiles.NapeAxe.axes.add(new projectiles.NapeAxe(250, 70));
+			add(projectiles.NapeAxe.axes);
 			FlxG.sound.play(AssetPaths.arrowshoot__wav);
 		}
 	}
 
 	private function endLevel()
 	{
-		Goblin.goblins.destroy();
-		NapeProjectile.projectiles.destroy();
-		NapeProjectile.deadProjectiles.destroy();
+		actors.Goblin.goblins.destroy();
+		projectiles.NapeProjectile.projectiles.destroy();
+		projectiles.NapeProjectile.deadProjectiles.destroy();
 
 		spawnTimer.stop();
 		shootTimer.stop();
@@ -255,7 +264,7 @@ class PlayState extends FlxNapeState
 		}
 		else
 		{
-			FlxG.switchState(new ShowHoardState());
+			FlxG.switchState(new states.ShowHoardState());
 		}
 	}
 	
@@ -283,14 +292,14 @@ class PlayState extends FlxNapeState
 		shieldCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(shieldCountText);
 		
-		add(new GreedyGoblinUI(0, 18));
+		add(new actors.GreedyGoblinUI(0, 18));
 		greedCountText = new FlxText(16, 18, 32);
 		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"]+"";
 		greedCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
 		greedCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(greedCountText);
 		
-		add(new OgreUI(4, 36));
+		add(new actors.OgreUI(4, 36));
 		ogreCountText = new FlxText(16, 36, 32);
 		ogreCountText.text = Reg.upgrades["ogre"]["number"]+"";
 		ogreCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");

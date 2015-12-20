@@ -1,10 +1,11 @@
-package;
+package states;
 
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import util.Button;
 /**
  * ...
  * @author John Doughty
@@ -19,7 +20,7 @@ class CreditsState extends FlxState
 	var greeds:FlxText;
 	var ogres:FlxText;
 	var extra:FlxText;
-	var menuBtn:Button;
+	var menuBtn:util.Button;
 	
 	override public function create():Void 
 	{
@@ -75,7 +76,7 @@ class CreditsState extends FlxState
 			ogres.scale.set(2, 2);
 			add(ogres);
 		}
-		menuBtn = new Button(75, 180, 150, 50, AssetPaths.button__png, "Menu", menu, 27);
+		menuBtn = new util.Button(75, 180, 150, 50, AssetPaths.button__png, "Menu", menu, 27);
 		add(menuBtn);
 	}
 

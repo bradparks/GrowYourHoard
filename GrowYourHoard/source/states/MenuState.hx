@@ -1,4 +1,4 @@
-package;
+package states;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import flixel.plugin.MouseEventManager;
+import util.Button;
 
 /**
  * A FlxState which can be used for the game's menu.
@@ -15,9 +16,9 @@ class MenuState extends FlxState
 {
 	var subHead:FlxText;
 	var head:FlxText;
-	var playBtn:Button;
-	var helpBtn:Button;
-	var creditsBtn:Button;
+	var playBtn:util.Button;
+	var helpBtn:util.Button;
+	var creditsBtn:util.Button;
 	var goblin:FlxSprite;
 	var goblin2:FlxSprite;
 
@@ -54,13 +55,13 @@ class MenuState extends FlxState
 		head.scale.set(2, 2);
 		add(head);
 
-		playBtn = new Button(100, 100, 120, 30, AssetPaths.button__png, "PLAY", play, 18);
+		playBtn = new util.Button(100, 100, 120, 30, AssetPaths.button__png, "PLAY", play, 18);
 		add(playBtn);
 
-		helpBtn = new Button(100, 135, 120, 30, AssetPaths.button__png, "HELP", help, 18);
+		helpBtn = new util.Button(100, 135, 120, 30, AssetPaths.button__png, "HELP", help, 18);
 		add(helpBtn);
 		
-		creditsBtn = new Button(100, 170, 120, 30, AssetPaths.button__png, "Credits", credits, 18);
+		creditsBtn = new util.Button(100, 170, 120, 30, AssetPaths.button__png, "Credits", credits, 18);
 		add(creditsBtn);
 		FlxG.autoPause = false;
 	}
@@ -85,16 +86,16 @@ class MenuState extends FlxState
 	public function play(sprite:FlxSprite = null)
 	{
 		Reg.reset();
-		FlxG.switchState(new PlayState());
+		FlxG.switchState(new states.PlayState());
 	}
 
 	public function help(sprite:FlxSprite = null)
 	{
-		FlxG.switchState(new HelpState());
+		FlxG.switchState(new states.HelpState());
 	}
 
 	public function credits(sprite:FlxSprite = null)
 	{
-		FlxG.switchState(new CreditsState());
+		FlxG.switchState(new states.CreditsState());
 	}
 }

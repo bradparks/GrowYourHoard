@@ -1,10 +1,10 @@
-package;
+package actors;
 
 /**
  * ...
  * @author John Doughty
  */
-class OgreShow extends Ogre
+class OgreShow extends actors.Ogre
 {
 	override function getScore()
 	{

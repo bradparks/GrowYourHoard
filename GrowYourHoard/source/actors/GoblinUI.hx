@@ -1,10 +1,11 @@
-package;
+package actors;
+import actors.Goblin;
 
 /**
  * ...
  * @author John Doughty
  */
-class GoblinUI extends Goblin
+class GoblinUI extends actors.Goblin
 {
 	override function setup() 
 	{

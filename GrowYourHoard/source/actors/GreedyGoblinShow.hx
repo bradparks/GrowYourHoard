@@ -1,10 +1,10 @@
-package;
+package actors;
 
 /**
  * ...
  * @author John Doughty
  */
-class GoblinShow extends Goblin
+class GreedyGoblinShow extends actors.GreedyGoblin
 {
 	override function getScore()
 	{

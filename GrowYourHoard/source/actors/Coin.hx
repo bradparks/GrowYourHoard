@@ -1,4 +1,4 @@
-package;
+package actors;
 
 import flixel.addons.nape.FlxNapeSprite;
 import nape.geom.Vec2;

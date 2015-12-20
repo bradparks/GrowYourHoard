@@ -1,6 +1,7 @@
-package;
+package projectiles;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
+import projectiles.Axe;
 
 /**
  * ...
@@ -13,7 +14,7 @@ class NapeAxe extends NapeProjectile
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
-		damage = 3;
+		damage = 2;
 		NapeProjectile.projectiles.add(axes);
 	}
 
@@ -39,6 +40,6 @@ class NapeAxe extends NapeProjectile
 
 	override public function getSpawnedSprite(x:Float, y:Float):FlxSprite
 	{
-		return new Axe(x, y);
+		return new projectiles.Axe(x, y);
 	}
 }
