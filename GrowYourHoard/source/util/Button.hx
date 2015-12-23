@@ -6,6 +6,8 @@ import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.plugin.MouseEventManager;
+import flixel.FlxG;
+import flixel.input.touch.FlxTouch;
 /**
  * ...
  * @author John Doughty
@@ -15,6 +17,7 @@ class Button extends FlxGroup
 	public var background:FlxSprite;
 	public var text:FlxText;
 	public var clickRegion:FlxSprite;
+	public var clickFunc:Dynamic;
 
 	public function new(x:Float, y:Float, width:Int, height:Int, backgroundSpriteFile:String, textString:String, click:Dynamic,?fontSize:Int)
 	{
@@ -36,8 +39,11 @@ class Button extends FlxGroup
 		add(background);
 		add(text);
 		add(clickRegion);
-
+		#if !mobile
 		MouseEventManager.add(clickRegion, null, click, over, out, false, true, false);
+		#else
+		clickFunc = click;
+		#end
 	}
 
 	public function over(sprite:FlxSprite)
@@ -48,5 +54,31 @@ class Button extends FlxGroup
 	public function out(sprite:FlxSprite)
 	{
 		clickRegion.alpha = 0;
+	}
+	
+	override public function update():Void 
+	{
+		super.update();
+		var touch:FlxTouch;
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed && 
+			touch.x >= clickRegion.x &&
+			touch.x <= clickRegion.x + clickRegion.width &&
+			touch.y >= clickRegion.y &&
+			touch.y <= clickRegion.y + clickRegion.height &&
+			clickFunc != null)
+			{
+				clickFunc();
+			}
+
+			if (touch.pressed)
+			{
+			}
+
+			if (touch.justReleased)
+			{
+			}
+		}
 	}
 }

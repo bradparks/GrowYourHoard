@@ -58,9 +58,9 @@ class PlayState extends FlxNapeState
 		projectiles.NapeProjectile.deadProjectiles = new FlxGroup();
 		projectiles.NapeArrow.arrows = new FlxGroup();
 		projectiles.NapeAxe.axes = new FlxGroup();
-
+		#if !mobile
 		FlxG.mouse.visible = false;
-
+		#end
 		background = new FlxSprite(0, 0, AssetPaths.background__png);
 		background.moves = false;
 		background.solid = false;
@@ -140,10 +140,13 @@ class PlayState extends FlxNapeState
 			FlxG.overlap(soldier, actors.Goblin.goblins, handleSoldierCollision);
 			FlxG.overlap(soldier.hitBox, player.goblin, hitSoldier);
 		}
+		
+		#if !mobile
 		if (FlxG.keys.justPressed.G)
 		{
 			napeDebugEnabled = !napeDebugEnabled;
 		}
+		#end
 		updateUnitCounts();
 	}
 
@@ -255,8 +258,9 @@ class PlayState extends FlxNapeState
 		shootTimer.stop();
 		levelTimer.stop();
 
+		#if !mobile
 		FlxG.mouse.visible = true;
-
+		#end
 
 		if (Reg.score >= 100)
 		{

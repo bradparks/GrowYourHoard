@@ -6,7 +6,6 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
-import flixel.plugin.MouseEventManager;
 import util.Button;
 
 /**

@@ -222,7 +222,7 @@ class PlayerGroup extends FlxGroup
 		{
 			doubleTapDuration += FlxG.elapsed;
 		}
-
+		#if !mobile
 		if (FlxG.keys.anyJustPressed(keyboardInputs["left"]) || FlxG.mouse.justPressed)
 		{
 			deltaX = processDoubleTapInput("left", -50);
@@ -231,17 +231,63 @@ class PlayerGroup extends FlxGroup
 		{
 			deltaX = processDoubleTapInput("right", 50);
 		}
-
+		#else
+		var left:Int = 0;
+		var right:Int = 0;
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.x <= FlxG.width / 2 && touch.justPressed)
+			{
+				left++;
+			} 
+			else if (touch.justPressed)
+			{
+				right++;
+			}
+		}
+		if (left>right)
+		{
+			deltaX = processDoubleTapInput("left", -50);
+		}
+		else if (left<right)
+		{
+			deltaX = processDoubleTapInput("right", 50);
+		}
+		#end
 		return deltaX;
 	}
 
 	private function hasLeftInput()
 	{
-		return FlxG.keys.anyPressed(keyboardInputs["left"]) || FlxG.mouse.pressed;
+		var result:Bool = false;
+		#if !mobile
+		result = FlxG.keys.anyPressed(keyboardInputs["left"]) || FlxG.mouse.pressed;
+		#else
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.x <= FlxG.width / 2 && touch.pressed)
+			{
+				result = true;
+			}
+		}
+		#end
+		return result;
 	}
 
 	private function hasRightInput()
 	{
-		return FlxG.keys.anyPressed(keyboardInputs["right"]) || FlxG.mouse.pressedRight;
+		var result:Bool = false;
+		#if !mobile
+		result = FlxG.keys.anyPressed(keyboardInputs["right"]) || FlxG.mouse.pressedRight;
+		#else
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.x > FlxG.width / 2 && touch.pressed)
+			{
+				result = true;
+			}
+		}
+		#end
+		return result;
 	}
 }
