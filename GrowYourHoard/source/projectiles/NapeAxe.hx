@@ -14,7 +14,7 @@ class NapeAxe extends NapeProjectile
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
-		damage = 2;
+		damage = 3;
 		NapeProjectile.projectiles.add(axes);
 	}
 
