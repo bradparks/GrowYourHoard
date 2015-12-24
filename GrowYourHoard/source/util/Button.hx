@@ -39,11 +39,10 @@ class Button extends FlxGroup
 		add(background);
 		add(text);
 		add(clickRegion);
-		#if !mobile
+		#if !FLX_NO_MOUSE
 		MouseEventManager.add(clickRegion, null, click, over, out, false, true, false);
-		#else
-		clickFunc = click;
 		#end
+		clickFunc = click;
 	}
 
 	public function over(sprite:FlxSprite)
@@ -59,6 +58,7 @@ class Button extends FlxGroup
 	override public function update():Void 
 	{
 		super.update();
+		#if !FLX_NO_TOUCH
 		var touch:FlxTouch;
 		for (touch in FlxG.touches.list)
 		{
@@ -80,5 +80,6 @@ class Button extends FlxGroup
 			{
 			}
 		}
+		#end
 	}
 }

@@ -21,16 +21,16 @@
     <class path="C:\HaxeToolkit\haxe\lib\openfl\3,5,2" />
     <class path="C:\HaxeToolkit\haxe\lib\nape\2,0,19" />
     <class path="source" />
-    <class path="export\android\haxe" />
+    <class path="export\html5\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="flixel-addons=1.1.1&#xA;flixel=3.3.12&#xA;lime=2.8.1&#xA;openfl=3.5.2&#xA;nape=2.0.19&#xA;FLX_NO_KEYBOARD&#xA;openfl-next&#xA;FLX_NO_MOUSE&#xA;tools=2.8.1&#xA;no-compilation&#xA;native&#xA;lime-native&#xA;openfl-native&#xA;FLX_RENDER_TILE&#xA;android&#xA;mobile&#xA;android&#xA;android-9&#xA;display" />
+    <option directives="flixel-addons=1.1.1&#xA;flixel=3.3.12&#xA;lime=2.8.1&#xA;openfl=3.5.2&#xA;nape=2.0.19&#xA;openfl-next&#xA;tools=2.8.1&#xA;FLX_NO_DEBUG&#xA;no-compilation&#xA;openfl-html5&#xA;canvas&#xA;NAPE_RELEASE_BUILD&#xA;FLX_RENDER_BLIT&#xA;lime-html5&#xA;html5&#xA;web&#xA;html5&#xA;display" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="False" />
-    <option additional="--macro openfl.Lib.includeExterns()&#xA;--remap flash:openfl&#xA;-debug #--macro keep(&quot;Main&quot;)" />
+    <option additional="--macro openfl.Lib.includeExterns()&#xA;--remap flash:openfl&#xA;--macro allowPackage(&quot;flash&quot;)" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

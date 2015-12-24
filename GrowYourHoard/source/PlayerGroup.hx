@@ -212,6 +212,8 @@ class PlayerGroup extends FlxGroup
 	private function performDoubleTap()
 	{
 		var deltaX:Int = 0;
+		var left:Int = 0;
+		var right:Int = 0;
 
 		if (doubleTapDuration > 0.1)
 		{
@@ -222,18 +224,27 @@ class PlayerGroup extends FlxGroup
 		{
 			doubleTapDuration += FlxG.elapsed;
 		}
-		#if !mobile
-		if (FlxG.keys.anyJustPressed(keyboardInputs["left"]) || FlxG.mouse.justPressed)
+		#if !FLX_NO_KEYBOARD
+		if (FlxG.keys.anyJustPressed(keyboardInputs["left"]))
 		{
-			deltaX = processDoubleTapInput("left", -50);
+			left++;
 		}
-		else if (FlxG.keys.anyJustPressed(keyboardInputs["right"]) || FlxG.mouse.justPressedRight)
+		else if (FlxG.keys.anyJustPressed(keyboardInputs["right"]))
 		{
-			deltaX = processDoubleTapInput("right", 50);
+			right++;
 		}
-		#else
-		var left:Int = 0;
-		var right:Int = 0;
+		#end
+		#if !FLX_NO_MOUSE
+		if (FlxG.mouse.justPressed)
+		{
+			left++;
+		}
+		else if (FlxG.mouse.justPressedRight)
+		{
+			right++;
+		}
+		#end
+		#if !FLX_NO_TOUCH
 		for (touch in FlxG.touches.list)
 		{
 			if (touch.x <= FlxG.width / 2 && touch.justPressed)
@@ -245,6 +256,7 @@ class PlayerGroup extends FlxGroup
 				right++;
 			}
 		}
+		#end
 		if (left>right)
 		{
 			deltaX = processDoubleTapInput("left", -50);
@@ -253,22 +265,33 @@ class PlayerGroup extends FlxGroup
 		{
 			deltaX = processDoubleTapInput("right", 50);
 		}
-		#end
 		return deltaX;
 	}
 
 	private function hasLeftInput()
 	{
 		var result:Bool = false;
-		#if !mobile
-		result = FlxG.keys.anyPressed(keyboardInputs["left"]) || FlxG.mouse.pressed;
-		#else
+		var touched:Bool = false;
+		#if !FLX_NO_KEYBOARD
+		result = FlxG.keys.anyPressed(keyboardInputs["left"]);
+		#end
+		#if !FLX_NO_TOUCH
 		for (touch in FlxG.touches.list)
 		{
-			if (touch.x <= FlxG.width / 2 && touch.pressed)
+			if (touch.pressed)
 			{
-				result = true;
+				touched = true;
+				if (touch.x <= FlxG.width / 2 && touch.pressed)
+				{
+					result = true;
+				}
 			}
+		}
+		#end
+		#if !FLX_NO_MOUSE
+		if(!result && !touched)
+		{
+			result = FlxG.mouse.pressed;
 		}
 		#end
 		return result;
@@ -277,15 +300,27 @@ class PlayerGroup extends FlxGroup
 	private function hasRightInput()
 	{
 		var result:Bool = false;
-		#if !mobile
-		result = FlxG.keys.anyPressed(keyboardInputs["right"]) || FlxG.mouse.pressedRight;
-		#else
+		var touched:Bool = false;
+		#if !FLX_NO_KEYBOARD
+		result = FlxG.keys.anyPressed(keyboardInputs["right"]);
+		#end
+		#if !FLX_NO_TOUCH
 		for (touch in FlxG.touches.list)
 		{
-			if (touch.x > FlxG.width / 2 && touch.pressed)
+			if (touch.pressed)
 			{
-				result = true;
+				touched = true;
+				if (touch.x > FlxG.width / 2 && touch.pressed)
+				{
+					result = true;
+				}
 			}
+		}
+		#end
+		#if !FLX_NO_MOUSE
+		if(!result && !touched)
+		{
+			result = FlxG.mouse.pressedRight;
 		}
 		#end
 		return result;
