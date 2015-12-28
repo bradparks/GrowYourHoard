@@ -93,13 +93,13 @@ class WinState extends FlxNapeState
 		if (FlxRandom.chanceRoll(1) && goblinSurvivors > 0)
 		{
 			goblinSurvivors -= 1;
-			add(new Goblin(270, 135));
+			add(new Goblin(270, 156));
 		}
 
 		if (FlxRandom.chanceRoll(1) && greedyGoblinSurvivors > 0)
 		{
 			greedyGoblinSurvivors -= 1;
-			add(new GreedyGoblin(270, 135));
+			add(new GreedyGoblin(270, 156));
 		}
 
 
