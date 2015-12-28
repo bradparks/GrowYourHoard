@@ -1,6 +1,6 @@
 package states;
 
-import actors.GoblinShow;
+import actors.Goblin;
 import flixel.addons.nape.FlxNapeState;
 import flixel.addons.nape.FlxNapeSprite;
 import nape.space.Space;
@@ -41,7 +41,7 @@ class ShowHoardState extends FlxNapeState
 		head.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		head.scale.set(2, 2);
 		add(head);
-		add(new actors.GoblinShow(250, 125));
+		add(new Goblin(250, 125));
 		scoreText = new FlxText(0, 100, 320);
 		scoreText.text = "0 Gold";
 		scoreText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 20, FlxColor.GOLDEN, "center");

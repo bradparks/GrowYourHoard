@@ -10,6 +10,7 @@ class GreedyGoblin extends actors.Goblin
 	public function new(X:Float=0, Y:Float=0, unitHealth:Float=1.0, ?SimpleGraphic:Dynamic)
 	{
 		super(X, Y, unitHealth, SimpleGraphic);
+		value = 3;
 	}
 
 	override public function update():Void
@@ -39,10 +40,6 @@ class GreedyGoblin extends actors.Goblin
 		FlxVelocity.moveTowardsPoint(this, new FlxPoint(0 - width, y), 45);
 	}
 
-	override private function getScore()
-	{
-		return 3;
-	}
 
 	override private function getUnitTag()
 	{

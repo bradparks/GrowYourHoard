@@ -4,6 +4,8 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.util.FlxPoint;
 import flixel.util.FlxVelocity;
+import flixel.FlxG;
+import states.PlayState;
 
 /**
  * ...
@@ -12,11 +14,13 @@ import flixel.util.FlxVelocity;
 class Goblin extends FlxSprite
 {
 	public static var goblins:FlxGroup = new FlxGroup();
+	private var value:Int = 1;
+	private var startY:Float;
 
 	public function new(X:Float=0, Y:Float=0, unitHealth:Float=1.0, ?SimpleGraphic:Dynamic)
 	{
 		super(X, Y, SimpleGraphic);
-
+		startY = Y;
 		solid = true;
 		immovable = true;
 		health = unitHealth;
@@ -62,14 +66,21 @@ class Goblin extends FlxSprite
 		}
 	}
 
-	private function getScore()
+	private function getScore():Int
 	{
-		return 1;
+		if (Type.getClass(FlxG.state) == PlayState)
+		{
+			return value;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 	private function getTargetY()
 	{
-		return 190;
+		return startY;
 	}
 
 	private function getUnitTag()

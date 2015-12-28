@@ -1,8 +1,9 @@
 package states;
 
 import actors.Coin;
-import actors.GreedyGoblinShow;
-import actors.OgreShow;
+import actors.GreedyGoblin;
+import actors.Ogre;
+import actors.Goblin;
 import flixel.addons.nape.FlxNapeState;
 import flixel.addons.nape.FlxNapeSprite;
 import flixel.group.FlxGroup;
@@ -15,7 +16,6 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import states.CreditsState;
 import states.MenuState;
-import actors.GoblinShow;
 import util.Button;
 
 class WinState extends FlxNapeState
@@ -87,19 +87,19 @@ class WinState extends FlxNapeState
 		if (FlxRandom.chanceRoll(1) && ogreSurvivors > 0)
 		{
 			ogreSurvivors -= 1;
-			add(new actors.OgreShow(270, 112));
+			add(new Ogre(270, 112));
 		}
 		
 		if (FlxRandom.chanceRoll(1) && goblinSurvivors > 0)
 		{
 			goblinSurvivors -= 1;
-			add(new actors.GoblinShow(270, 140));
+			add(new Goblin(270, 135));
 		}
 
 		if (FlxRandom.chanceRoll(1) && greedyGoblinSurvivors > 0)
 		{
 			greedyGoblinSurvivors -= 1;
-			add(new actors.GreedyGoblinShow(270, 140));
+			add(new GreedyGoblin(270, 135));
 		}
 
 

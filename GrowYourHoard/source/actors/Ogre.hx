@@ -24,11 +24,6 @@ class Ogre extends actors.Goblin
 		FlxVelocity.moveTowardsPoint(this, new FlxPoint(0 - width, y), 20);
 	}
 
-	override private function getTargetY()
-	{
-		return 147;
-	}
-
 	override private function getUnitTag()
 	{
 		return "ogre";
