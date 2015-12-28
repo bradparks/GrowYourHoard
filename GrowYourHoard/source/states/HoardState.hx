@@ -1,7 +1,7 @@
 package states;
 
-import actors.GreedyGoblinUI;
-import actors.OgreUI;
+import actors.GreedyGoblin;
+import actors.Ogre;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -10,6 +10,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import util.Button;
+import util.UIUnit;
 
 /**
  * A FlxState which can be used for the game's menu.
@@ -185,14 +186,14 @@ class HoardState extends FlxState
 		shieldCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(shieldCountText);
 		
-		add(new actors.GreedyGoblinUI(0, 18));
+		add(new UIUnit(0, 18, new GreedyGoblin()));
 		greedCountText = new FlxText(16, 18, 32);
 		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"]+"";
 		greedCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
 		greedCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(greedCountText);
 		
-		add(new actors.OgreUI(4, 36));
+		add(new UIUnit(4, 36, new Ogre()));
 		ogreCountText = new FlxText(16, 36, 32);
 		ogreCountText.text = Reg.upgrades["ogre"]["number"]+"";
 		ogreCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");

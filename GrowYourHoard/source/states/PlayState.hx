@@ -1,6 +1,7 @@
 package states;
 
 import actors.Soldier;
+import util.UIUnit;
 import flixel.addons.nape.FlxNapeSprite;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -23,9 +24,7 @@ import projectiles.NapeAxe;
 import projectiles.NapeProjectile;
 import actors.Goblin;
 import actors.GreedyGoblin;
-import actors.GreedyGoblinUI;
 import actors.Ogre;
-import actors.OgreUI;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -296,14 +295,14 @@ class PlayState extends FlxNapeState
 		shieldCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(shieldCountText);
 		
-		add(new actors.GreedyGoblinUI(0, 18));
+		add(new UIUnit(0, 18, new GreedyGoblin()));
 		greedCountText = new FlxText(16, 18, 32);
 		greedCountText.text = Reg.upgrades["greedy_goblin"]["number"]+"";
 		greedCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
 		greedCountText.setBorderStyle(FlxText.BORDER_OUTLINE, FlxColor.BROWN, 1);
 		add(greedCountText);
 		
-		add(new actors.OgreUI(4, 36));
+		add(new UIUnit(4, 36, new Ogre()));
 		ogreCountText = new FlxText(16, 36, 32);
 		ogreCountText.text = Reg.upgrades["ogre"]["number"]+"";
 		ogreCountText.setFormat(AssetPaths.Our_Arcade_Games__ttf, 12, FlxColor.GOLDEN, "left");
