@@ -7,7 +7,10 @@ class Reg
 
 	public static var counters;
 	public static var upgrades;
-
+	
+	public static inline var gameWidth = 320; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	public static inline var gameHeight = 240; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	
 	public static function reset():Void
 	{
 		Reg.score = 0;

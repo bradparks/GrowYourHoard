@@ -13,8 +13,6 @@ import states.MenuState;
 
 class Main extends Sprite
 {
-	var gameWidth:Int = 320; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
-	var gameHeight:Int = 240; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var initialState:Class<FlxState> = MenuState; // The FlxState the game starts with.
 	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
 	var framerate:Int = 60; // How many frames per second the game should run at.
@@ -59,27 +57,27 @@ class Main extends Sprite
 
 		if (zoom == -1)
 		{
-			var ratioX:Float = stageWidth / gameWidth;
-			var ratioY:Float = stageHeight / gameHeight;
+			var ratioX:Float = stageWidth / Reg.gameWidth;
+			var ratioY:Float = stageHeight / Reg.gameHeight;
 			zoom = Math.min(ratioX, ratioY);
-			gameWidth = Math.ceil(stageWidth / zoom);
-			gameHeight = Math.ceil(stageHeight / zoom);
+			Reg.gameWidth = Math.ceil(stageWidth / zoom);
+			Reg.gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
 		Reg.reset();
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
+		addChild(new FlxGame(Reg.gameWidth, Reg.gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 		timer = new Timer(3500);
 		timer.run = playMusic;
 		
-		}
-		
-		private function playMusic()
-		{
-			timer.stop();
-			#if flash
-			FlxG.sound.playMusic(AssetPaths.carnivalrides__mp3, 1, true);
-			#else
-			FlxG.sound.playMusic(AssetPaths.carnivalrides__ogg, 1, true);
-			#end
-		}
+	}
+	
+	private function playMusic()
+	{
+		timer.stop();
+		#if flash
+		FlxG.sound.playMusic(AssetPaths.carnivalrides__mp3, 1, true);
+		#else
+		FlxG.sound.playMusic(AssetPaths.carnivalrides__ogg, 1, true);
+		#end
+	}
 }
